@@ -28,6 +28,12 @@
   color: #61dafb;
 }
 
+.input-group {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 .container {
   padding: 1em;
 }
@@ -44,6 +50,10 @@
   flex-direction:  column;
   justify-content: center;
   align-items: center;
+}
+
+.btn-outline {
+  width: 15%;
 }
 
 .optionbtn {
