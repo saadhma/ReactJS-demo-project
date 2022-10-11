@@ -28,6 +28,12 @@
   color: #61dafb;
 }
 
+.input-group {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 .container {
   padding: 1em;
 }
@@ -35,39 +41,6 @@
 .date-picker {
   width: 100%;
   display: flex;
-}
-
-.table-outline {
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-direction:  column;
-  justify-content: center;
-  align-items: center;
-}
-
-.optionbtn {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-  
-.table {
-  border: 2px solid forestgreen;
-  width: 800px;
-  height: 200px;
-  border-collapse: separate;
-  border-spacing: 15px;
-}
-  
-th {
-  border-bottom: 1px solid black;
-}
-  
-td {
-  border-bottom: 1px solid black;
-  text-align: center;
 }
 
 @keyframes App-logo-spin {
