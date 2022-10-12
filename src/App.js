@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState } from 'react';
 import { Button, Input, Table } from './components';
+import TableContext from './Contexts/TableContext';
 
 export default function App() {
 
@@ -18,11 +19,6 @@ export default function App() {
   const handleChangeDescription = (event) => {
     const description = event.target.value;
     setValueDescription(description);
-  }
-
-  function clearInput() {
-    setValueDescription("");
-    setValueDate("");
   }
 
   function addTodo(date, description) {
@@ -64,32 +60,39 @@ export default function App() {
     setValueDescription(todoItem.description);
   }
 
+  function clearInput() {
+    setValueDescription("");
+    setValueDate("");
+  }
+
   const handleDeleteTodo = (id) => {
     setTodosList(todoList => todoList.filter((item) => item.id !== id));
   };
 
   return (
     <div className="input-group">
-      <div className="container">
-        <Input type={"text"} placeholder={"Add Description"} onChange={handleChangeDescription} value={valueDescription} />
-      </div>
-      <div className="container">
-        <Input type={"date"} placeholder={"Add Date"} onChange={handleChangeDate} value={valueDate} />
-        &nbsp;&nbsp;&nbsp;
-        {!editing ?
-          <Button
-            onClick={() => addTodo(valueDate, valueDescription)}
-            text="Add New ToDo"
-            className={"btn-small"}
-          /> :
-          <Button
-            onClick={() => editTodo(valueId, valueDate, valueDescription)}
-            text="Edit ToDo"
-            className={"btn-small"}
-          />
-        }
-      </div>
-      <Table todos={todos} handleDeleteTodo={(id) => handleDeleteTodo(id)} handleEnableEditing={(todoItem) => handleEnableEditing(todoItem)} />
+        <div className="container">
+          <Input type={"text"} placeholder={"Add Description"} onChange={handleChangeDescription} value={valueDescription} />
+        </div>
+        <div className="container">
+          <Input type={"date"} placeholder={"Add Date"} onChange={handleChangeDate} value={valueDate} />
+          &nbsp;&nbsp;&nbsp;
+          {!editing ?
+            <Button
+              onClick={() => addTodo(valueDate, valueDescription)}
+              text="Add New ToDo"
+              className={"btn-small"}
+            /> :
+            <Button
+              onClick={() => editTodo(valueId, valueDate, valueDescription)}
+              text="Edit ToDo"
+              className={"btn-small"}
+            />
+          }
+        </div>
+        <TableContext.Provider value={{ todos, handleDeleteTodo, handleEnableEditing}}>
+          <Table/>
+      </TableContext.Provider>
     </div>
   );
 }

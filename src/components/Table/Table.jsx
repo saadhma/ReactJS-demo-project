@@ -1,13 +1,12 @@
 import './Table.css';
 import { Button } from '../../components';
-import React from 'react';
+import React, { useContext } from 'react';
+import TableContext from '../../Contexts/TableContext';
 
-export default function Table({
-    todos,
-    handleDeleteTodo,
-    handleEnableEditing
-}) {
+export default function Table() {
 
+    const { todos, handleDeleteTodo, handleEnableEditing } = useContext(TableContext);
+    
     return (
         <div className="table-outline">
             <table className="table">
