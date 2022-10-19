@@ -1,0 +1,28 @@
+.container {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+}
+
+.labelText {
+    font: bold;
+    font-size: large;
+    text-decoration-color: gray;
+    margin-bottom: 10px;
+}
+
+.formSection {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.btnSection {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}

@@ -4,10 +4,11 @@ export default function Input({
     type,
     onChange,
     value,
-    placeholder
+    placeholder,
+    width
 }) {
 
     return (
-        <input type={type} placeholder={placeholder} onChange={onChange} value={value} />
+        <input style={{width: {width}}} type={type} placeholder={placeholder} onChange={onChange} value={value} />
     );
 }
