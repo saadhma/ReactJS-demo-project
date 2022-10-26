@@ -93,19 +93,3 @@ export default function App() {
     </div>
   );
 }
-
-// function mapStateToProps(state){
-//   return {
-//       todoList: state,
-//   };
-// };
-
-// function mapDispatchToProps(dispatch){
-//     return {
-//         addItemToList: (item) => {
-//           dispatch(addItemToList(item));
-//         }
-//     };
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(App);

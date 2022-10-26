@@ -29,7 +29,7 @@ export default function tableReducer(state = initialState, action) {
     case "REMOVE_ITEM_FROM_LIST":
       return {
         ...state,
-        todoList: state.todoList.filter((item) => item.id !== action.payload)
+        todoList: state.todoList.filter((item) => item.id !== action.payload),
       };
 
     default:
