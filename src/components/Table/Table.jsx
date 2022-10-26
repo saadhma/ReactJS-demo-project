@@ -1,12 +1,11 @@
 import './Table.css';
 import { Button } from '../../components';
 import React from 'react';
-import { useStore } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export default function Table({ editTodoItem, deleteTodoItem }) { 
 
-    const store = useStore();
-    const state = store.getState();
+    const todoList = useSelector((state) => state.Table.todoList);
 
     return (
         <div className="table-outline">
@@ -19,7 +18,7 @@ export default function Table({ editTodoItem, deleteTodoItem }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {state.Table.todoList.map((todo, index) => {
+                    {todoList.map((todo, index) => {
                         return (
                             <tr key={todo.id}>
                                 <td>{index + 1}</td>
@@ -40,17 +39,3 @@ export default function Table({ editTodoItem, deleteTodoItem }) {
         </div>
     );
 }
-
-// const mapStateToProps = state => {
-//     return {
-//         todos: state.todos,
-//     };
-// };
-
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         deleteItemFromList: removeItemFromList
-//     };
-// };
-
-// export default connect(mapStateToProps)(Table);
