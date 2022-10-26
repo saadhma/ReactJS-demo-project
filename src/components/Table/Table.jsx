@@ -1,12 +1,12 @@
 import './Table.css';
 import { Button } from '../../components';
 import React from 'react';
+import { useStore } from 'react-redux';
 
-export default function Table({
-    todos,
-    handleDeleteTodo,
-    handleEnableEditing
-}) {
+export default function Table({ editTodoItem, deleteTodoItem }) { 
+
+    const store = useStore();
+    const state = store.getState();
 
     return (
         <div className="table-outline">
@@ -19,7 +19,7 @@ export default function Table({
                     </tr>
                 </thead>
                 <tbody>
-                    {todos.map((todo, index) => {
+                    {state.Table.todoList.map((todo, index) => {
                         return (
                             <tr key={todo.id}>
                                 <td>{index + 1}</td>
@@ -27,11 +27,11 @@ export default function Table({
                                 <td>{todo.date}</td>
                                 <td>
                                     <div className="optionbtn">
-                                        <Button className={"btn"} onClick={() => handleEnableEditing(todo)} text={"Edit"} />
+                                        <Button className={"btn"} onClick={() => {editTodoItem(todo)}} text={"Edit"} />
                                         &nbsp;&nbsp;&nbsp;
-                                        <Button className={"btn"} onClick={() => handleDeleteTodo(todo.id)} text={"Delete"} />
+                                        <Button className={"btn"} onClick={() => {deleteTodoItem(todo.id)}} text={"Delete"} />
                                     </div>
-                                    </td>
+                                </td>
                             </tr>
                         );
                     })}
@@ -40,3 +40,17 @@ export default function Table({
         </div>
     );
 }
+
+// const mapStateToProps = state => {
+//     return {
+//         todos: state.todos,
+//     };
+// };
+
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         deleteItemFromList: removeItemFromList
+//     };
+// };
+
+// export default connect(mapStateToProps)(Table);
