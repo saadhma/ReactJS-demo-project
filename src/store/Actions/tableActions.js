@@ -1,20 +1,19 @@
-import { ADD_ITEM_TO_LIST, EDIT_ITEM, REMOVE_ITEM_FROM_LIST } from "./actionTypes";
+import { GET_USERS, REMOVE_ITEM_FROM_LIST } from "./actionTypes";
+import axios from 'axios';
 
-export const addItemToList = (item) => async (dispatch) => {
-    return dispatch({
-          type: ADD_ITEM_TO_LIST,
-          payload: item
-        });
+export const GetUsers = () => {
+      return dispatch => {
+          axios.get(`https://jsonplaceholder.typicode.com/users`)
+          .then(res => {
+              dispatch({
+                  type: GET_USERS,
+                  payload: res.data
+              });
+          })
+      };
   };
-  
-  export const editItem = (item) => async (dispatch) => {
-    return dispatch({
-          type: EDIT_ITEM,
-          payload: item
-        });
-  };
-  
-  export const removeItemFromList = (id) => async (dispatch) => {
+
+export const removeItemFromList = (id) => async (dispatch) => {
     return dispatch({
           type: REMOVE_ITEM_FROM_LIST,
           payload: id

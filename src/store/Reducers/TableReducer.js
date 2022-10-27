@@ -1,19 +1,19 @@
 const initialState = {
-  todoList: [],
+  usersList: [],
 };
 
 export default function tableReducer(state = initialState, action) {
   switch (action.type) {
 
-    case "ADD_ITEM_TO_LIST":
+    case "GET_USERS":
       return {
         ...state,
-        todoList: [...state.todoList, action.payload],
+        usersList: action.payload,
       };
 
     case "EDIT_ITEM":
       const updatedItem = action.payload;
-      const updatedItems = state.todoList.map((item) => {
+      const updatedItems = state.usersList.map((item) => {
         if (item.id === updatedItem.id) {
           item.date = updatedItem.date;
           item.description = updatedItem.description;
@@ -23,13 +23,13 @@ export default function tableReducer(state = initialState, action) {
       });
       return {
         ...state,
-        todoList: updatedItems,
+        usersList: updatedItems,
       };
 
     case "REMOVE_ITEM_FROM_LIST":
       return {
         ...state,
-        todoList: state.todoList.filter((item) => item.id !== action.payload)
+        usersList: state.usersList.filter((item) => item.id !== action.payload)
       };
 
     default:

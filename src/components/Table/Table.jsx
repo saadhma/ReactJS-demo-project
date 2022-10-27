@@ -1,12 +1,17 @@
 import './Table.css';
 import { Button } from '../../components';
-import React from 'react';
-import { useStore } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { GetUsers } from '../../store/Actions/tableActions';
 
-export default function Table({ editTodoItem, deleteTodoItem }) { 
+export default function Table({ deleteTodoItem }) { 
 
-    const store = useStore();
-    const state = store.getState();
+    const usersList = useSelector(state => state.Table);
+    
+    const dispatch = useDispatch();
+    useEffect(() => { 
+        dispatch(GetUsers()); 
+    }, [dispatch]);
 
     return (
         <div className="table-outline">
@@ -14,22 +19,40 @@ export default function Table({ editTodoItem, deleteTodoItem }) {
                 <thead>
                     <tr>
                         <td>No.</td>
-                        <td>Description</td>
-                        <td>Date</td>
+                        <td>Name</td>
+                        <td>Email</td>
+                        <td>Phone</td>
+                        <td>Website</td>
+                        <td>Username</td>
+                        <td>Company</td>
+                        <td>City</td>
+                        <td>Street</td>
+                        <td>Suite</td>
+                        <td>ZipCode</td>
+                        <td>Latitude</td>
+                        <td>Longitude</td>
                     </tr>
                 </thead>
                 <tbody>
-                    {state.Table.todoList.map((todo, index) => {
+                    {usersList.usersList.map((user, index) => {
                         return (
-                            <tr key={todo.id}>
+                            <tr key={user.id}>
                                 <td>{index + 1}</td>
-                                <td>{todo.description}</td>
-                                <td>{todo.date}</td>
+                                <td>{user.name}</td>
+                                <td>{user.email}</td>
+                                <td>{user.phone}</td>
+                                <td>{user.website}</td>
+                                <td>{user.username}</td>
+                                <td>{user.company.name}</td>
+                                <td>{user.address.city}</td>
+                                <td>{user.address.street}</td>
+                                <td>{user.address.suite}</td>
+                                <td>{user.address.zipcode}</td>
+                                <td>{user.address.geo.lat}</td>
+                                <td>{user.address.geo.lng}</td>
                                 <td>
                                     <div className="optionbtn">
-                                        <Button className={"btn"} onClick={() => {editTodoItem(todo)}} text={"Edit"} />
-                                        &nbsp;&nbsp;&nbsp;
-                                        <Button className={"btn"} onClick={() => {deleteTodoItem(todo.id)}} text={"Delete"} />
+                                        <Button className={"btn"} onClick={() => {deleteTodoItem(user.id)}} text={"Delete"} />
                                     </div>
                                 </td>
                             </tr>
@@ -40,17 +63,3 @@ export default function Table({ editTodoItem, deleteTodoItem }) {
         </div>
     );
 }
-
-// const mapStateToProps = state => {
-//     return {
-//         todos: state.todos,
-//     };
-// };
-
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         deleteItemFromList: removeItemFromList
-//     };
-// };
-
-// export default connect(mapStateToProps)(Table);
