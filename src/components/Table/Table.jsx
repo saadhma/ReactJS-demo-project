@@ -2,19 +2,26 @@ import './Table.css';
 import { Button } from '../../components';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { GetUsers } from '../../store/Actions/tableActions';
+import { getUsers, removeUser } from '../../store/Actions/tableActions';
 
-export default function Table({ deleteTodoItem }) { 
+export default function Table() {
 
-    const usersList = useSelector(state => state.Table);
-    
     const dispatch = useDispatch();
-    useEffect(() => { 
-        dispatch(GetUsers()); 
-    }, [dispatch]);
+    const users = useSelector(state => state.Table.users);
+    const loading = useSelector(state => state.Table.loading);
+    const error = useSelector(state => state.Table.error);
+
+    useEffect(() => {
+        dispatch(getUsers());
+    }, [dispatch])
+
+    console.log(users);
 
     return (
         <div className="table-outline">
+            {users.loading && <p>Loading...</p>}
+            {users.length === 0 && !loading && <p>No users available!</p>}
+            {error && !loading && <p>{error}</p>}
             <table className="table">
                 <thead>
                     <tr>
@@ -34,7 +41,7 @@ export default function Table({ deleteTodoItem }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {usersList.usersList.map((user, index) => {
+                    {users.map((user, index) => {
                         return (
                             <tr key={user.id}>
                                 <td>{index + 1}</td>
@@ -52,7 +59,7 @@ export default function Table({ deleteTodoItem }) {
                                 <td>{user.address.geo.lng}</td>
                                 <td>
                                     <div className="optionbtn">
-                                        <Button className={"btn"} onClick={() => {deleteTodoItem(user.id)}} text={"Delete"} />
+                                        <Button className={"btn"} onClick={() => { dispatch(removeUser(user.id)) }} text={"Delete"} />
                                     </div>
                                 </td>
                             </tr>

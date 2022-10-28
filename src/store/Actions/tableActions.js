@@ -1,21 +1,14 @@
-import { GET_USERS, REMOVE_ITEM_FROM_LIST } from "./actionTypes";
-import axios from 'axios';
+import { GET_USERS_REQUESTED, REMOVE_A_USER } from "./actionTypes";
 
-export const GetUsers = () => {
-      return dispatch => {
-          axios.get(`https://jsonplaceholder.typicode.com/users`)
-          .then(res => {
-              dispatch({
-                  type: GET_USERS,
-                  payload: res.data
-              });
-          })
-      };
-  };
+export function getUsers() {
+    return {
+      type: GET_USERS_REQUESTED,
+    }
+  }
 
-export const removeItemFromList = (id) => async (dispatch) => {
-    return dispatch({
-          type: REMOVE_ITEM_FROM_LIST,
-          payload: id
-        });
-  };
+export function removeUser(id) {
+    return {
+      type: REMOVE_A_USER,
+      payload: id
+    }
+  }

@@ -1,38 +1,38 @@
+import { GET_USERS_REQUESTED, GET_USERS_SUCCESS, GET_USERS_FAILED, REMOVE_A_USER } from "../Actions/actionTypes";
+
 const initialState = {
-  usersList: [],
-};
+  users: [],
+  loading: false,
+  error: null,
+}
 
-export default function tableReducer(state = initialState, action) {
+export default function users(state = initialState, action) {
   switch (action.type) {
-
-    case "GET_USERS":
+    case GET_USERS_REQUESTED:
       return {
         ...state,
-        usersList: action.payload,
-      };
-
-    case "EDIT_ITEM":
-      const updatedItem = action.payload;
-      const updatedItems = state.usersList.map((item) => {
-        if (item.id === updatedItem.id) {
-          item.date = updatedItem.date;
-          item.description = updatedItem.description;
-          return updatedItem;
-        }
-        return item;
-      });
+        loading: true,
+      }
+    case GET_USERS_SUCCESS:
       return {
         ...state,
-        usersList: updatedItems,
-      };
-
-    case "REMOVE_ITEM_FROM_LIST":
+        loading: false,
+        users: action.users
+      }
+    case GET_USERS_FAILED:
       return {
         ...state,
-        usersList: state.usersList.filter((item) => item.id !== action.payload)
-      };
+        loading: false,
+        error: action.message,
+      }
+    case REMOVE_A_USER:
+      return {
+        ...state,
+        loading: false,
+        users: state.users.filter((item) => item.id !== action.payload)
+      }
 
     default:
-      return state;
+      return state
   }
-};
+}

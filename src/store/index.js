@@ -1,8 +1,11 @@
 import { createStore, applyMiddleware } from 'redux';
-import reduxThunk from 'redux-thunk';
 import reducers from "./Reducers";
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './sagas';
 
-//thunk middleware is used to intercept actions so as to make API call before dispatching result to reducer
-const store = createStore(reducers, applyMiddleware(reduxThunk));
+const sagaMiddleware = createSagaMiddleware()
+
+const store = createStore(reducers, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(rootSaga)
 
 export default store;
