@@ -7,21 +7,16 @@ import { getUsers, removeUser } from '../../store/Actions/tableActions';
 export default function Table() {
 
     const dispatch = useDispatch();
-    const users = useSelector(state => state.Table.users);
-    const loading = useSelector(state => state.Table.loading);
-    const error = useSelector(state => state.Table.error);
+    const fetchUsers = useSelector(state => state.usersReducer?.get('users'));
 
     useEffect(() => {
         dispatch(getUsers());
-    }, [dispatch])
+    },[dispatch]);
 
-    console.log(users);
+    console.log("fetchUsers", fetchUsers); 
 
     return (
         <div className="table-outline">
-            {users.loading && <p>Loading...</p>}
-            {users.length === 0 && !loading && <p>No users available!</p>}
-            {error && !loading && <p>{error}</p>}
             <table className="table">
                 <thead>
                     <tr>
@@ -41,7 +36,7 @@ export default function Table() {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user, index) => {
+                    {fetchUsers.map((user, index) => {
                         return (
                             <tr key={user.id}>
                                 <td>{index + 1}</td>

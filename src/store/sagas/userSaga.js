@@ -1,5 +1,4 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { removeUser } from '../../store/Actions/tableActions';
 
 const apiUrl = `https://jsonplaceholder.typicode.com/users`;
 async function getApi() {
@@ -26,9 +25,8 @@ function* fetchUsers() {
 }
 
 function* removeUserFromList(id) {
-    console.log(id);
     try {
-       yield put({type: removeUser(), action: id});
+       yield put({type: 'REMOVE_A_USER', action: id});
     } catch (e) {
        console.log(e);
     }
