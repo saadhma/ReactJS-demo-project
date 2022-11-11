@@ -1,0 +1,10 @@
+.genre-section-style {
+    display: flex;
+    padding-block: 5px;
+    padding-inline: 5px;
+}
+
+.user-score-style {
+    padding-block: 5px;
+    padding-inline: 5px;
+}

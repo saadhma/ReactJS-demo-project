@@ -1,0 +1,49 @@
+.text-style {
+    width: 15%;
+    padding-left: 30px;
+    padding-right: 20px;
+    font-weight: bold;
+}
+
+.img-style {
+    padding-left: 12px;
+    font-weight: 500;
+}
+
+.percentage-div-style {
+    position: relative;
+}
+
+.text-block {
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+}
+
+.circle {
+    position: absolute;
+    bottom: -10px;
+    left: 15px;
+    background-color: black;
+    color: white;
+    display: flex;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    font-size: 9px;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+}
+
+.inner-circle {
+    position: absolute;
+    display: flex;
+    width: 35px;
+    height: 35px;
+    align-items:inherit;
+    padding-left: 3px;
+}

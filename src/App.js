@@ -1,13 +1,12 @@
 import './App.css';
 import React from 'react';
-import { Table } from './components';
+import RoutesScreen from './Routes';
 
 export default function App() {
 
   return (
-    <div className="input-group">
-      &nbsp;&nbsp;&nbsp;
-      <Table />
+    <div>
+      <RoutesScreen />
     </div>
   );
 }
