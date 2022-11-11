@@ -1,0 +1,40 @@
+.text-style {
+    width: 100%;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-weight: bold;
+}
+
+.paragraph-style {
+    width: 95%;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-weight: normal;
+    line-height: 20px;
+}
+
+.txt {
+    color: #01B4E4;
+    text-decoration: none;
+}
+
+.txt:hover {
+    text-decoration: underline;
+}
+
+.btn-div-style {
+    display: flex;
+    color: #01B4E4;
+    padding-inline: 30px;
+    padding-block: 25px;
+}
+
+.txt-cancel {
+    padding-top: 10px;
+    color: #01B4E4;
+    text-decoration: none;
+}
+
+.txt-cancel:hover {
+    text-decoration: underline;
+}

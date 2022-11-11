@@ -1,0 +1,86 @@
+.text-style {
+    width: 100%;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-weight: bold;
+}
+
+.paragraph-style {
+    width: 95%;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-weight: normal;
+    line-height: 20px;
+}
+
+.txt {
+    color: #01B4E4;
+    text-decoration: none;
+}
+
+.txt:hover {
+    text-decoration: underline;
+}
+
+.btn-div-style {
+    display: flex;
+    color: #01B4E4;
+    padding-inline: 30px;
+    padding-block: 25px;
+}
+
+.txt-cancel {
+    padding-top: 10px;
+    color: #01B4E4;
+    text-decoration: none;
+}
+
+.txt-cancel:hover {
+    text-decoration: underline;
+}
+
+.parent-container {
+    display: flex;
+    flex-direction: row;
+    padding-top: 100px;
+    padding-inline: 40px;
+    padding-bottom: 40px;
+}
+
+.child1-container {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px;
+    box-shadow: 2px 3px 2px #E5E4E2;
+    border: 1px solid #E5E4E2;
+    border-radius: 10px;
+}
+
+.child2-container {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+.benefits-container {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 25px;
+    padding-top: 20px;
+    box-shadow: 10px;
+    box-shadow: 2px 3px 2px #E5E4E2;
+    border: 1px solid #E5E4E2;
+}
+
+.benefit-section {
+    display: flex;
+    flex-direction: row;
+    padding-inline: 5px;
+    padding-top: 20px;
+}
+
+.icon-style {
+    display: flex;
+    flex-direction: row;
+    padding-inline: 5px;
+}

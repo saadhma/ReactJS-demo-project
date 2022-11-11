@@ -61,7 +61,7 @@ export default function HeaderComponent() {
                     <Link
                         className='text-link'
                         variant="h8"
-                        href="#"
+                        href="/SignUp"
                         color="inherit"
                         underline="none"
                     >
