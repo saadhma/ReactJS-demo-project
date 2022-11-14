@@ -13,6 +13,11 @@ import LoginScreen from "./views/AuthScreens/Login/LoginScreen";
 import ResetPasswordScreen from "./views/AuthScreens/ResetPassword/ResetPasswordScreen";
 import ResendEmailVerificationScreen from "./views/AuthScreens/ResendEmailVerfication/ResendEmailVerficationScreen";
 import SignUpScreen from "./views/AuthScreens/SignUp/SignUpScreen";
+import TermsOfUseScreen from "./views/LegalSectionScreens/TermsOfUse/TermsOfUseScreen";
+import PrivacyPolicyScreen from "./views/LegalSectionScreens/PrivacyPolicy/PrivacyPolicyScreen";
+import ContactUsScreen from "./views/LegalSectionScreens/ContactUs/ContactUsScreen";
+import GeneralFAQScreen from "./views/FAQScreens/GeneralFAQ/GeneralFAQScreen";
+import AccountFAQScreen from "./views/FAQScreens/AccountFAQ/AccountFAQScreen";
 
 export default function RoutesScreen() {
     return (
@@ -30,6 +35,11 @@ export default function RoutesScreen() {
             <Route path="/AiringTodayTVShowsScreen" element={<AiringTodayTVShowsScreen/>} exact/>
             <Route path="/CurrentlyAiringTVShowsScreen" element={<CurrentlyAiringTVShowsScreen/>} exact/>
             <Route path="/TopRatedTVShowsScreen" element={<TopRatedTVShowsScreen/>} exact/>
+            <Route path="/TermsOfUseScreen" element={<TermsOfUseScreen/>} exact/>
+            <Route path="/PrivacyPolicyScreen" element={<PrivacyPolicyScreen/>} exact/>
+            <Route path="/ContactUsScreen" element={<ContactUsScreen/>} exact/>
+            <Route path="/faq/general" element={<GeneralFAQScreen/>} exact/>
+            <Route path="/faq/account" element={<AccountFAQScreen/>} exact/>
         </Routes>
     )
 }

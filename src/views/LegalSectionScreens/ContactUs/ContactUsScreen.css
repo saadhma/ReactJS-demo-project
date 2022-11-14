@@ -1,0 +1,25 @@
+.parent-container {
+    display: flex;
+    flex-direction: row;
+    padding-top: 100px;
+    padding-inline: 40px;
+    padding-bottom: 40px;
+}
+
+.child-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.spacer-style {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-inline: 25px;
+}
+
+.line-style {
+    flex: 1;
+    height: 1px;
+    background-color: grey;
+}

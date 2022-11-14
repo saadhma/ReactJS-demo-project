@@ -3,6 +3,7 @@ import './Home.css';
 import { HeaderComponent } from '../../components/Header';
 import HorizontalImageList from '../../components/HorizontalImageList/HorizontalImageList';
 import BasicTabs from '../../components/TabBar/TabBar.tsx';
+import FooterComponent from '../../components/Footer/Footer';
 
 export default function Home() {
     return (
@@ -23,6 +24,7 @@ export default function Home() {
                 <BasicTabs tabs={2} tab1={'Today'} tab2={'This Week'} />
             </div>
             <HorizontalImageList />
+            <FooterComponent/>
         </div>
     );
 }
