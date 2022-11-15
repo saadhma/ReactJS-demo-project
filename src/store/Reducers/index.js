@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import { usersReducer } from "./TableReducer";
+import { moviesReducer } from "./MoviesReducer";
 
 
 const reducers = combineReducers({
-  usersReducer,
+  moviesReducer,
   //other reducers come here...
 });
 

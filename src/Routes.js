@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./views/Home/Home";
+import HomeScreen from "./views/Home/HomeScreen";
 import PopularMoviesScreen from "./views/MovieScreens/PopularMoviesScreen";
 import NowPlayingMoviesScreen from "./views/MovieScreens/NowPlayingMoviesScreen";
 import UpcomingMoviesScreen from "./views/MovieScreens/UpcomingMoviesScreen";
@@ -22,7 +22,7 @@ import AccountFAQScreen from "./views/FAQScreens/AccountFAQ/AccountFAQScreen";
 export default function RoutesScreen() {
     return (
         <Routes>
-            <Route path="/" element={<Home/>} exact/>
+            <Route path="/" element={<HomeScreen/>} exact/>
             <Route path="/LoginScreen" element={<LoginScreen/>} exact/>
             <Route path="/SignUp" element={<SignUpScreen/>} exact/>
             <Route path="/ResetPassword" element={<ResetPasswordScreen/>} exact/>

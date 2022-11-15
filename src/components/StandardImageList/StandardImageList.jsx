@@ -4,10 +4,10 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import { Colors } from '../../constants/Colors';
-import bannerImage from '../../assets/banner.jpeg';
+import { POSTER_IMAGE_BASE_URL } from "../../constants/Constants";
 import CircularProgres from '@mui/material/CircularProgress';
 
-export default function StandardImageList({ imagesList }) {
+export default function StandardImageList({ dataList }) {
     return (
         <ImageList sx={{
             gridAutoFlow: "row",
@@ -17,11 +17,11 @@ export default function StandardImageList({ imagesList }) {
             gridAutoColumns: "minmax(160px, 1fr)",
         }}
             cols={5} rowHeight={300}>
-            {imagesList.map((item) => (
+            {dataList?.map((item) => (
                 <div className="movie-box">
                     <ImageListItem style={styles.container} key={item.img}>
                         <img
-                            src={bannerImage}
+                            src={`${POSTER_IMAGE_BASE_URL}${item.poster_path}`}
                             style={styles.imageItemStyle}
                             srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                             alt={item.title}
@@ -37,8 +37,8 @@ export default function StandardImageList({ imagesList }) {
                         </div>
                         <ImageListItemBar
                             className="img-style"
-                            title={item.thumbnail.name}
-                            subtitle={'15 Dec 2021'}
+                            title={item.title}
+                            subtitle={item.release_date}
                             position="below"
                         />
                     </ImageListItem>

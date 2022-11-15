@@ -58,7 +58,7 @@ export default function NowPlayingMoviesScreen() {
                                 </div>
                             </Grid>
                             <Grid item xs={9}>
-                                <StandardImageList imagesList={images} />
+                                <StandardImageList dataList={images} />
                             </Grid>
                         </Grid>
                     </div>
