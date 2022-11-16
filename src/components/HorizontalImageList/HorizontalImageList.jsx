@@ -25,7 +25,7 @@ export default function HorizontalImageList({ moviesData }) {
             <div class="circle">
               <p>{Math.round(movieItem.vote_average/0.1)}%</p>
               <div class="inner-circle">
-                <CircularProgres variant="determinate" value={75} style={{ color: Colors.lightGreenColor }} />
+                <CircularProgres variant="determinate" value={Math.round(movieItem.vote_average/0.1)} style={{ color: Colors.lightGreenColor }} />
               </div>
             </div>
           </div>

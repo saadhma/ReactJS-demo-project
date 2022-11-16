@@ -18,8 +18,6 @@ export default function PopularMoviesScreen() {
         dispatch(fetchPopularMovies());
     }, [dispatch]);
 
-    console.log("popular movies", popularMoviesData.results);
-
     return (
         <div>
             <HeaderComponent />

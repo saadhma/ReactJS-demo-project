@@ -22,7 +22,7 @@ export default function FAQ() {
                     </a>
                 </div>
                 <div className='benefit-section'>
-                    <a href="/">
+                    <a href="/ContactUsScreen">
                         Staying In Touch
                     </a>
                 </div>
@@ -42,22 +42,22 @@ export default function FAQ() {
                     </a>
                 </div>
                 <div className='benefit-section'>
-                    <a href="/">
+                    <a href="/faq/website">
                         Website
                     </a>
                 </div>
                 <div className='benefit-section'>
-                    <a href="/">
+                    <a href="/documentation/api">
                         API Overview
                     </a>
                 </div>
                 <div className='benefit-section'>
-                    <a href="/">
+                    <a href="/documentation/api/discover">
                         Discover Examples
                     </a>
                 </div>
                 <div className='benefit-section'>
-                    <a href="/">
+                    <a href="/documentation/api/sessions">
                         API Sessions
                     </a>
                 </div>

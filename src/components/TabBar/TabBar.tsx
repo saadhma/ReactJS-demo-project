@@ -18,7 +18,7 @@ export default function BasicTabs({ tabs, tab1, tab2 }) {
     setValue(newValue);
   };
 
-  if(tabs === 2 ){
+  if (tabs === 2) {
     return (
       <Box sx={{ width: '100%', paddingLeft: '20px', paddingTop: '10px', }}>
         <Box sx={{}}>
@@ -34,10 +34,9 @@ export default function BasicTabs({ tabs, tab1, tab2 }) {
       </Box>
     );
   }
-  if(tabs === 4 ){
+  if (tabs === 4) {
     return (
-      <Box sx={{ width: '100%', paddingLeft: '20px', paddingTop: '10px', }}>
-        <Box sx={{}}>
+      <Box sx={{ paddingLeft: '20px', paddingTop: '10px', }}>
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" TabIndicatorProps={{
             style: {
               backgroundColor: Colors.whiteColor
@@ -48,7 +47,6 @@ export default function BasicTabs({ tabs, tab1, tab2 }) {
             <Tab style={{ backgroundColor: value === 2 ? Colors.headerColor : Colors.whiteColor, borderRadius: 15, color: value === 2 ? Colors.lightGreenColor : Colors.headerColor }} label="For Rent" {...a11yProps(2)} />
             <Tab style={{ backgroundColor: value === 3 ? Colors.headerColor : Colors.whiteColor, borderRadius: 15, color: value === 3 ? Colors.lightGreenColor : Colors.headerColor }} label="In Theatres" {...a11yProps(3)} />
           </Tabs>
-        </Box>
       </Box>
     );
   }

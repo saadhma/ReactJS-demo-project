@@ -13,7 +13,7 @@ import ButtonWithPopUpMenu from '../PopUpMenu/PopUpMenu.tsx';
 export default function HeaderComponent() {
 
     return (
-        <AppBar
+            <AppBar
             className='header'
             style={{ backgroundColor: Colors.headerColor }}
             position="absolute"
@@ -21,30 +21,36 @@ export default function HeaderComponent() {
             elevation={0}
             sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}>
             <Toolbar>
-                <Box sx={{ width: '75%' }}>
+                <Box sx={{ width: '15%', flexDirection: 'row' }}>
                     <a href='/'>
-                        <img className='logo-style'
+                        <img
                             src={logo}
                             alt="T M D B"
                         />
                     </a>
-                        <ButtonWithPopUpMenu items={4} buttonName={'Movies'}/>
-                        <ButtonWithPopUpMenu items={4} buttonName={'TV Shows'}/>
-                        <ButtonWithPopUpMenu items={1} buttonName={'People'}/>
-                        <ButtonWithPopUpMenu items={4} buttonName={'More'}/>
                 </Box>
-                <Box sx={{ width: '25%', flexDirection: 'row' }}>
-                <a href='/'>
+                <Box sx={{ width: '60%', flexDirection: 'row' }}>
+                    <ButtonWithPopUpMenu items={4} buttonName={'Movies'} />
+                    <ButtonWithPopUpMenu items={4} buttonName={'TV Shows'} />
+                    <ButtonWithPopUpMenu items={1} buttonName={'People'} />
+                    <ButtonWithPopUpMenu items={4} buttonName={'More'} />
+                </Box>
+                <Box>
+                    <a href='/'>
                         <img className='plus-icon-style'
                             src={plusIcon}
                             alt="plus"
                         />
                     </a>
+                </Box>
+                <Box>
                     <Button
                         className='lang-btn-style'
-                        href="#" variant="outlined"
-                        sx={{ borderColor: 'white' }}
-                    >
+                        href="#" 
+                        variant="outlined"
+                        sx={{ 
+                            minWidth: '10px',
+                            borderColor: 'white' }}>
                         <text className='text-link'>
                             EN
                         </text>
@@ -68,7 +74,7 @@ export default function HeaderComponent() {
                         Join TMDB
                     </Link>
                 </Box>
-        </Toolbar>
+            </Toolbar>
         </AppBar >
     );
 }

@@ -1,4 +1,5 @@
-import { GET_MOVIES_REQUESTED, GET_POPULAR_MOVIES_REQUESTED, REMOVE_A_USER } from "./actionTypes";
+import { GET_MOVIES_REQUESTED, GET_POPULAR_MOVIES_REQUESTED, GET_NOW_PLAYING_MOVIES_REQUESTED, 
+  GET_UPCOMING_MOVIES_REQUESTED, GET_TOP_RATED_MOVIES_REQUESTED } from "./actionTypes";
 
 export function fetchMovies() {
     return {
@@ -12,9 +13,20 @@ export function fetchPopularMovies() {
   }
 }
 
-export function removeUser(id) {
-    return {
-      type: REMOVE_A_USER,
-      payload: id
-    }
+export function fetchNowPlayingMovies() {
+  return {
+    type: GET_NOW_PLAYING_MOVIES_REQUESTED,
   }
+}
+
+export function fetchUpcomingMovies() {
+  return {
+    type: GET_UPCOMING_MOVIES_REQUESTED,
+  }
+}
+
+export function fetchTopRatedMovies() {
+  return {
+    type: GET_TOP_RATED_MOVIES_REQUESTED,
+  }
+}

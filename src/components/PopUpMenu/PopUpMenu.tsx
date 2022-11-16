@@ -7,29 +7,29 @@ import { Colors } from '../../constants/Colors';
 
 export default function ButtonWithPopUpMenu({ items, buttonName }) {
 
-  if(items === 4 && buttonName === 'Movies'){
+  if (items === 4 && buttonName === 'Movies') {
     return (
       <PopupState variant="popover" popupId="demo-popup-menu">
         {(popupState) => (
           <React.Fragment>
             <Button style={{
               backgroundColor: Colors.headerColor, color: Colors.whiteColor, fontWeight: 'bold',
-              paddingInline: 15, paddingBottom: 15
+              paddingLeft: 40, paddingRight: 20, textTransform: 'none'
             }} {...bindTrigger(popupState)}>
               {buttonName}
             </Button>
-              <Menu {...bindMenu(popupState)}>
+            <Menu {...bindMenu(popupState)}>
               <a href='/PopularMoviesScreen' style={{ textDecoration: 'none', color: Colors.headerColor }}>
                 <MenuItem onClick={popupState.close}>Popular</MenuItem>
               </a>
               <a href='/NowPlayingMoviesScreen' style={{ textDecoration: 'none', color: Colors.headerColor }}>
-              <MenuItem onClick={popupState.close}>Now Playing</MenuItem>
+                <MenuItem onClick={popupState.close}>Now Playing</MenuItem>
               </a>
               <a href='/UpcomingMoviesScreen' style={{ textDecoration: 'none', color: Colors.headerColor }}>
-              <MenuItem onClick={popupState.close}>Upcoming</MenuItem>
+                <MenuItem onClick={popupState.close}>Upcoming</MenuItem>
               </a>
               <a href='/TopRatedMoviesScreen' style={{ textDecoration: 'none', color: Colors.headerColor }}>
-              <MenuItem onClick={popupState.close}>Top Rated</MenuItem>
+                <MenuItem onClick={popupState.close}>Top Rated</MenuItem>
               </a>
             </Menu>
           </React.Fragment>
@@ -38,29 +38,30 @@ export default function ButtonWithPopUpMenu({ items, buttonName }) {
     );
   }
 
-  if(items === 4 && buttonName === 'TV Shows'){
+  if (items === 4 && buttonName === 'TV Shows') {
     return (
       <PopupState variant="popover" popupId="demo-popup-menu">
         {(popupState) => (
           <React.Fragment>
-            <Button style={{
-              backgroundColor: Colors.headerColor, color: Colors.whiteColor, fontWeight: 'bold',
-              paddingInline: 15, paddingBottom: 15
-            }} {...bindTrigger(popupState)}>
+            <Button
+              style={{
+                backgroundColor: Colors.headerColor, color: Colors.whiteColor, fontWeight: 'bold',
+                paddingInline: 20, textTransform: 'none'
+              }} {...bindTrigger(popupState)}>
               {buttonName}
             </Button>
-              <Menu {...bindMenu(popupState)}>
+            <Menu {...bindMenu(popupState)}>
               <a href='/PopularTVShowsScreen' style={{ textDecoration: 'none', color: Colors.headerColor }}>
                 <MenuItem onClick={popupState.close}>Popular</MenuItem>
               </a>
               <a href='/AiringTodayTVShowsScreen' style={{ textDecoration: 'none', color: Colors.headerColor }}>
-              <MenuItem onClick={popupState.close}>Airing Today</MenuItem>
+                <MenuItem onClick={popupState.close}>Airing Today</MenuItem>
               </a>
               <a href='/CurrentlyAiringTVShowsScreen' style={{ textDecoration: 'none', color: Colors.headerColor }}>
-              <MenuItem onClick={popupState.close}>On TV</MenuItem>
+                <MenuItem onClick={popupState.close}>On TV</MenuItem>
               </a>
               <a href='/TopRatedTVShowsScreen' style={{ textDecoration: 'none', color: Colors.headerColor }}>
-              <MenuItem onClick={popupState.close}>Top Rated</MenuItem>
+                <MenuItem onClick={popupState.close}>Top Rated</MenuItem>
               </a>
             </Menu>
           </React.Fragment>
@@ -69,18 +70,18 @@ export default function ButtonWithPopUpMenu({ items, buttonName }) {
     );
   }
 
-  if(items === 1 && buttonName === 'People'){
+  if (items === 1 && buttonName === 'People') {
     return (
       <PopupState variant="popover" popupId="demo-popup-menu">
         {(popupState) => (
           <React.Fragment>
             <Button style={{
               backgroundColor: Colors.headerColor, color: Colors.whiteColor, fontWeight: 'bold',
-              paddingInline: 15, paddingBottom: 15
+              paddingInline: 20, textTransform: 'none'
             }} {...bindTrigger(popupState)}>
               {buttonName}
             </Button>
-              <Menu {...bindMenu(popupState)}>
+            <Menu {...bindMenu(popupState)}>
               <a href='/PopularMoviesScreen' style={{ textDecoration: 'none', color: Colors.headerColor }}>
                 <MenuItem onClick={popupState.close}>Popular People</MenuItem>
               </a>
@@ -91,29 +92,29 @@ export default function ButtonWithPopUpMenu({ items, buttonName }) {
     );
   }
 
-  if(items === 4 && buttonName === 'More'){
+  if (items === 4 && buttonName === 'More') {
     return (
       <PopupState variant="popover" popupId="demo-popup-menu">
         {(popupState) => (
           <React.Fragment>
             <Button style={{
               backgroundColor: Colors.headerColor, color: Colors.whiteColor, fontWeight: 'bold',
-              paddingInline: 15, paddingBottom: 15
+              paddingInline: 20, textTransform: 'none'
             }} {...bindTrigger(popupState)}>
               {buttonName}
             </Button>
-              <Menu {...bindMenu(popupState)}>
+            <Menu {...bindMenu(popupState)}>
               <a href='/PopularMoviesScreen' style={{ textDecoration: 'none', color: Colors.headerColor }}>
                 <MenuItem onClick={popupState.close}>Discussions</MenuItem>
               </a>
               <a href='/NowPlayingMoviesScreen' style={{ textDecoration: 'none', color: Colors.headerColor }}>
-              <MenuItem onClick={popupState.close}>Leaderboard</MenuItem>
+                <MenuItem onClick={popupState.close}>Leaderboard</MenuItem>
               </a>
               <a href='/UpcomingMoviesScreen' style={{ textDecoration: 'none', color: Colors.headerColor }}>
-              <MenuItem onClick={popupState.close}>Support</MenuItem>
+                <MenuItem onClick={popupState.close}>Support</MenuItem>
               </a>
               <a href='/TopRatedMoviesScreen' style={{ textDecoration: 'none', color: Colors.headerColor }}>
-              <MenuItem onClick={popupState.close}>API</MenuItem>
+                <MenuItem onClick={popupState.close}>API</MenuItem>
               </a>
             </Menu>
           </React.Fragment>

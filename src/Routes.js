@@ -7,7 +7,7 @@ import UpcomingMoviesScreen from "./views/MovieScreens/UpcomingMoviesScreen";
 import TopRatedMoviesScreen from "./views/MovieScreens/TopRatedMoviesScreen";
 import PopularTVShowsScreen from "./views/TVShowsScreens/PopularTVShowsScreen";
 import AiringTodayTVShowsScreen from "./views/TVShowsScreens/AiringTodayTVShowsScreen";
-import CurrentlyAiringTVShowsScreen from "./views/TVShowsScreens/OnTVShowsScreen";
+import CurrentlyAiringTVShowsScreen from "./views/TVShowsScreens/OnAirTVShowsScreen";
 import TopRatedTVShowsScreen from "./views/TVShowsScreens/TopRatedTVShowsScreen";
 import LoginScreen from "./views/AuthScreens/Login/LoginScreen";
 import ResetPasswordScreen from "./views/AuthScreens/ResetPassword/ResetPasswordScreen";
@@ -18,6 +18,10 @@ import PrivacyPolicyScreen from "./views/LegalSectionScreens/PrivacyPolicy/Priva
 import ContactUsScreen from "./views/LegalSectionScreens/ContactUs/ContactUsScreen";
 import GeneralFAQScreen from "./views/FAQScreens/GeneralFAQ/GeneralFAQScreen";
 import AccountFAQScreen from "./views/FAQScreens/AccountFAQ/AccountFAQScreen";
+import WebsiteFAQScreen from "./views/FAQScreens/WebsiteFAQ/WebsiteFAQScreen";
+import APIOverviewScreen from "./views/FAQScreens/APIOverview/APIOverviewScreen";
+import APISessionsScreen from "./views/FAQScreens/APISessions/APISessionsScreen";
+import DiscoverExamplesScreen from "./views/FAQScreens/DiscoverExamples/DiscoverExamplesScreen";
 
 export default function RoutesScreen() {
     return (
@@ -40,6 +44,10 @@ export default function RoutesScreen() {
             <Route path="/ContactUsScreen" element={<ContactUsScreen/>} exact/>
             <Route path="/faq/general" element={<GeneralFAQScreen/>} exact/>
             <Route path="/faq/account" element={<AccountFAQScreen/>} exact/>
+            <Route path="/faq/website" element={<WebsiteFAQScreen/>} exact/>
+            <Route path="/documentation/api" element={<APIOverviewScreen/>} exact/>
+            <Route path="/documentation/api/sessions" element={<APISessionsScreen/>} exact/>
+            <Route path="/documentation/api/discover" element={<DiscoverExamplesScreen/>} exact/>
         </Routes>
     )
 }

@@ -29,16 +29,16 @@ export default function StandardImageList({ dataList }) {
                         />
                         <div className="percentage-div-style">
                             <div class="circle">
-                                <p>75%</p>
+                                <p>{Math.round(item.vote_average/0.1)}%</p>
                                 <div class="inner-circle">
-                                    <CircularProgres variant="determinate" value={75} style={{ color: Colors.lightGreenColor }} />
+                                    <CircularProgres variant="determinate" value={Math.round(item.vote_average/0.1)} style={{ color: Colors.lightGreenColor }} />
                                 </div>
                             </div>
                         </div>
                         <ImageListItemBar
                             className="img-style"
-                            title={item.title}
-                            subtitle={item.release_date}
+                            title={item.title || item.name}
+                            subtitle={item.release_date || item.first_air_date}
                             position="below"
                         />
                     </ImageListItem>

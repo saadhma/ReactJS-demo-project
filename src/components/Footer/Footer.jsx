@@ -20,7 +20,6 @@ export default function FooterComponent() {
           }}>
           JOIN THE COMMUNITY</Button>
       </div>
-      <div className="child-container">
         <div className="section-style">
           <p className="heading-txt-style">
             THE BASICS
@@ -28,7 +27,7 @@ export default function FooterComponent() {
           <a href='/' className='link-txt-style' > About TMDB </a>
           <a href='/ContactUsScreen' className='link-txt-style' > Contact Us </a>
           <a href='/' className='link-txt-style' > Support Forums </a>
-          <a href='/' className='link-txt-style' > API </a>
+          <a href='/documentation/api' className='link-txt-style' > API </a>
           <a href='/' className='link-txt-style' > System Status </a>
         </div>
         <div className="section-style">
@@ -57,6 +56,5 @@ export default function FooterComponent() {
           <a href='/PrivacyPolicyScreen' className='link-txt-style' > Privacy Policy </a>
         </div>
       </div>
-    </div>
   );
 }

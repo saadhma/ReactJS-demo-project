@@ -28,11 +28,6 @@
     justify-content: center;
 }
 
-.child-container {
-    display: flex;
-    flex-direction: row;
-}
-
 .logo-style {
     padding-block: 20px;
 }

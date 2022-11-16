@@ -2,9 +2,7 @@
     display: flex;
     top: 0;
     left: 0;
-    height: 70px;
-    width: 100%;
-    z-index: 10;
+    height: 65px;
     transition: top 0.2s linear;
 }
 
@@ -36,4 +34,10 @@
 
 .lang-btn-style {
     width: 30px;
+    height: 30px;
+}
+
+.text-link:hover {
+    background-color: #1E2541;
+    color: #FFF;
 }
