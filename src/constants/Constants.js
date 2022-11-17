@@ -21,6 +21,7 @@ export const POPULAR_MOVIES_URL = `${BASE_URL}/movie/popular`;
 export const NOW_PLAYING_MOVIES_URL = `${BASE_URL}/movie/now_playing`;
 export const UPCOMING_MOVIES_URL = `${BASE_URL}/movie/upcoming`;
 export const TOP_RATED_MOVIES_URL = `${BASE_URL}/movie/top_rated`;
+export const MOVIE_DETAILS_URL = `${BASE_URL}/movie/`;
 
 // TV SHOWS RELATED CONSTANTS
 

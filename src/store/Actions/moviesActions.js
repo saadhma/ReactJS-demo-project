@@ -1,5 +1,5 @@
 import { GET_MOVIES_REQUESTED, GET_POPULAR_MOVIES_REQUESTED, GET_NOW_PLAYING_MOVIES_REQUESTED, 
-  GET_UPCOMING_MOVIES_REQUESTED, GET_TOP_RATED_MOVIES_REQUESTED } from "./actionTypes";
+  GET_UPCOMING_MOVIES_REQUESTED, GET_TOP_RATED_MOVIES_REQUESTED, GET_MOVIE_DETAILS_REQUESTED, GET_MOVIE_CREDITS_REQUESTED } from "./actionTypes";
 
 export function fetchMovies() {
     return {
@@ -28,5 +28,19 @@ export function fetchUpcomingMovies() {
 export function fetchTopRatedMovies() {
   return {
     type: GET_TOP_RATED_MOVIES_REQUESTED,
+  }
+}
+
+export function fetchMovieDetails(id) {
+  return {
+    type: GET_MOVIE_DETAILS_REQUESTED,
+    payload: id
+  }
+}
+
+export function fetchMovieCredits(id) {
+  return {
+    type: GET_MOVIE_CREDITS_REQUESTED,
+    payload: id
   }
 }

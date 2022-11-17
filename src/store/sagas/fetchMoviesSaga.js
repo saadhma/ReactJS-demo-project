@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { STREAMMING_MOVIES_URL, FREE_MOVIES_URL, TRENDING_MOVIES_URL, POPULAR_MOVIES_URL, API_KEY, NOW_PLAYING_MOVIES_URL, UPCOMING_MOVIES_URL, TOP_RATED_MOVIES_URL } from '../../constants/Constants';
+import { STREAMMING_MOVIES_URL, FREE_MOVIES_URL, TRENDING_MOVIES_URL, POPULAR_MOVIES_URL, API_KEY, NOW_PLAYING_MOVIES_URL, UPCOMING_MOVIES_URL, TOP_RATED_MOVIES_URL, MOVIE_DETAILS_URL } from '../../constants/Constants';
 
 const streammingMoviesUrl = `${STREAMMING_MOVIES_URL}?api_key=${API_KEY}&language=en-US`;
 const freeMoviesUrl = `${FREE_MOVIES_URL}?api_key=${API_KEY}&language=en-US`;
@@ -107,6 +107,36 @@ async function getTopRatedMovies() {
     }
 }
 
+async function getMovieDetails(id) {
+    const moviesDetailsUrl = `${MOVIE_DETAILS_URL}${id.payload}?api_key=${API_KEY}`;
+    try {
+        const response = await fetch(moviesDetailsUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function getMovieCredits(id) {
+    const moviesDetailsUrl = `${MOVIE_DETAILS_URL}${id.payload}/credits?api_key=${API_KEY}`;
+    try {
+        const response = await fetch(moviesDetailsUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
 function* fetchMoviesData() {
     try {
         const streammingMovies = yield call(getStreammingMovies);
@@ -154,12 +184,35 @@ function* fetchTopRatedMoviesData() {
     }
 }
 
+function* fetchMovieDetailsData(id) {
+    try {
+        const movieDetailsData = yield call(getMovieDetails, id);
+        yield put({ type: 'GET_MOVIE_DETAILS_SUCCESS', movieDetailsData: movieDetailsData });
+    } catch (e) {
+        console.log(e.message);
+        yield put({ type: 'GET_MOVIE_DETAILS_FAILED', message: e.message });
+    }
+}
+
+function* fetchMovieCreditsData(id) {
+    try {
+        const movieCreditsData = yield call(getMovieCredits, id);
+        console.log(movieCreditsData);
+        yield put({ type: 'GET_MOVIE_CREDITS_SUCCESS', movieCreditsData: movieCreditsData });
+    } catch (e) {
+        console.log(e.message);
+        yield put({ type: 'GET_MOVIE_CREDITS_FAILED', message: e.message });
+    }
+}
+
 function* moviesSaga() {
     yield takeEvery('GET_MOVIES_REQUESTED', fetchMoviesData);
     yield takeEvery('GET_POPULAR_MOVIES_REQUESTED', fetchPopularMoviesData);
     yield takeEvery('GET_NOW_PLAYING_MOVIES_REQUESTED', fetchNowPlayingMoviesData);
     yield takeEvery('GET_UPCOMING_MOVIES_REQUESTED', fetchUpcomingMoviesData);
     yield takeEvery('GET_TOP_RATED_MOVIES_REQUESTED', fetchTopRatedMoviesData);
+    yield takeEvery('GET_MOVIE_DETAILS_REQUESTED', fetchMovieDetailsData);
+    yield takeEvery('GET_MOVIE_CREDITS_REQUESTED', fetchMovieCreditsData);
 }
 
 export default moviesSaga;

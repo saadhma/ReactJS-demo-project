@@ -22,6 +22,7 @@ import WebsiteFAQScreen from "./views/FAQScreens/WebsiteFAQ/WebsiteFAQScreen";
 import APIOverviewScreen from "./views/FAQScreens/APIOverview/APIOverviewScreen";
 import APISessionsScreen from "./views/FAQScreens/APISessions/APISessionsScreen";
 import DiscoverExamplesScreen from "./views/FAQScreens/DiscoverExamples/DiscoverExamplesScreen";
+import MovieDetailsScreen from "./views/MovieScreens/MovieDetailsScreen";
 
 export default function RoutesScreen() {
     return (
@@ -48,6 +49,7 @@ export default function RoutesScreen() {
             <Route path="/documentation/api" element={<APIOverviewScreen/>} exact/>
             <Route path="/documentation/api/sessions" element={<APISessionsScreen/>} exact/>
             <Route path="/documentation/api/discover" element={<DiscoverExamplesScreen/>} exact/>
+            <Route path="/movie/:id" element={<MovieDetailsScreen/>} exact/>
         </Routes>
     )
 }

@@ -19,20 +19,24 @@ export default function HorizontalImageList({ moviesData }) {
       }}
     >
       {moviesData?.map((movieItem) => (
-        <ImageListItem style={styles.container}>
-          <img src={`${POSTER_IMAGE_BASE_URL}${movieItem.poster_path}`} alt='' style={styles.imageItemStyle} />
+        <ImageListItem 
+        sx={{minWidth: (theme) => theme.spacing(4)}}
+        style={styles.container}>
+          <a href={"/movie/" + movieItem.id}>
+          <img src={`${POSTER_IMAGE_BASE_URL}${movieItem.poster_path || movieItem.profile_path}`} alt='' style={styles.imageItemStyle} />
+          </a>
           <div className="percentage-div-style">
             <div class="circle">
-              <p>{Math.round(movieItem.vote_average/0.1)}%</p>
+              <p>{Math.round(movieItem.vote_average / 0.1)}%</p>
               <div class="inner-circle">
-                <CircularProgres variant="determinate" value={Math.round(movieItem.vote_average/0.1)} style={{ color: Colors.lightGreenColor }} />
+                <CircularProgres variant="determinate" value={Math.round(movieItem.vote_average / 0.1)} style={{ color: Colors.lightGreenColor }} />
               </div>
             </div>
-          </div>
+          </div> 
           <ImageListItemBar
             className="img-style"
-            title={movieItem.title}
-            subtitle={movieItem.release_date}
+            title={movieItem.title || movieItem.name}
+            subtitle={movieItem.release_date || movieItem.character}
             position="below"
             loading="lazy"
           />
@@ -50,6 +54,7 @@ const styles = {
   imageItemStyle: {
     height: 250,
     borderRadius: 10,
+    cursor: 'pointer'
   },
   progressStyle: {
     margin: 2,
