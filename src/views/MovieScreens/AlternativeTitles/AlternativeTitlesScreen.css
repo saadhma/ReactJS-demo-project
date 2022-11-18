@@ -1,0 +1,48 @@
+.parent-container {
+    display: flex;
+    flex-direction: row;
+    padding-top: 100px;
+    padding-inline: 40px;
+    padding-bottom: 40px;
+}
+
+.child-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.table-style {
+    padding-inline: 25px;
+}
+
+.line-style {
+    flex: 1;
+    height: 1px;
+    background-color: grey;
+}
+
+.benefit-section {
+    display: flex;
+    flex-direction: row;
+    padding-inline: 25px;
+    padding-top: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #01B4E4;
+}
+
+.div-style {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px;
+    box-shadow: 2px 3px 2px #E5E4E2;
+    border: 1px solid #E5E4E2;
+    border-radius: 10px;
+}

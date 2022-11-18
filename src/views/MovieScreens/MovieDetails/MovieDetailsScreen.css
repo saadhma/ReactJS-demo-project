@@ -1,0 +1,7 @@
+.heading-style {
+    color: black;
+}
+
+.heading-style:hover {
+    color: lightslategrey;
+}

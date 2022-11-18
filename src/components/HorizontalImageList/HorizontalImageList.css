@@ -51,3 +51,20 @@
 .poster-style {
     padding-right: 20px;
 }
+
+.img-style {
+    padding-left: 12px;
+    padding-block: 10px;
+    font-weight: 500;
+}
+
+.title-style {
+    font-weight: bold;
+    color: black;
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+
+.subtitle-style {
+    color: lightslategrey;
+}

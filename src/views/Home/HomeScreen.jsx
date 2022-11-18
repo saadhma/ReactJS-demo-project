@@ -30,7 +30,7 @@ export default function HomeScreen() {
                     <BasicTabs tabs={4} />
                 </Grid>
             </Grid>
-            <HorizontalImageList moviesData={streammingMoviesData.results} />
+            <HorizontalImageList dataList={streammingMoviesData.results} />
             <Grid container style={{ paddingTop: '30px', paddingInline: '25px' }}>
                 <Grid item xs={2}>
                     <h2> Free to Watch </h2>
@@ -39,7 +39,7 @@ export default function HomeScreen() {
                     <BasicTabs tabs={2} tab1={'Movies'} tab2={'TV'} />
                 </Grid>
             </Grid>
-            <HorizontalImageList moviesData={freeMoviesData.results} />
+            <HorizontalImageList dataList={freeMoviesData.results} />
             <Grid container style={{ paddingTop: '30px', paddingInline: '25px' }}>
                 <Grid item xs={2}>
                     <h2> Trending </h2>
@@ -48,7 +48,7 @@ export default function HomeScreen() {
                     <BasicTabs tabs={2} tab1={'Today'} tab2={'This Week'} />
                 </Grid>
             </Grid>
-            <HorizontalImageList moviesData={trendingMoviesData.results} />
+            <HorizontalImageList dataList={trendingMoviesData.results} />
             <FooterComponent/>
         </div>
     );
