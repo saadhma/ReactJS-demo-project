@@ -21,7 +21,7 @@ export default function HorizontalImageList({ dataList, type }) {
         {dataList?.map((item) => (
           <ImageListItem style={styles.container}>
             <a href={"/movie/" + item.id}>
-              <img src={item.profile_path === null ? PersonImage : `${POSTER_IMAGE_BASE_URL}${item.poster_path || item.profile_path}`} alt='' style={styles.imageItemStyle} />
+              <img src={item.profile_path === null ? PersonImage : `${POSTER_IMAGE_BASE_URL}${item.poster_path || item.profile_path || item.backdrop_path}`} alt='' style={styles.imageItemStyle} />
             </a>
             <div className="title-style">
               {item.title || item.name}

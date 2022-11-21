@@ -1,5 +1,6 @@
 import { GET_MOVIES_REQUESTED, GET_POPULAR_MOVIES_REQUESTED, GET_NOW_PLAYING_MOVIES_REQUESTED, 
-  GET_UPCOMING_MOVIES_REQUESTED, GET_TOP_RATED_MOVIES_REQUESTED, GET_MOVIE_DETAILS_REQUESTED, GET_MOVIE_CREDITS_REQUESTED } from "./actionTypes";
+  GET_UPCOMING_MOVIES_REQUESTED, GET_TOP_RATED_MOVIES_REQUESTED, GET_MOVIE_DETAILS_REQUESTED, 
+  GET_MOVIE_CREDITS_REQUESTED, GET_MOVIE_KEYWORDS_REQUESTED, GET_MOVIE_REVIEWS_REQUESTED, GET_MOVIE_RECOMMENDATIONS_REQUESTED } from "./actionTypes";
 
 export function fetchMovies() {
     return {
@@ -41,6 +42,27 @@ export function fetchMovieDetails(id) {
 export function fetchMovieCredits(id) {
   return {
     type: GET_MOVIE_CREDITS_REQUESTED,
+    payload: id
+  }
+}
+
+export function fetchMovieKeywords(id) {
+  return {
+    type: GET_MOVIE_KEYWORDS_REQUESTED,
+    payload: id
+  }
+}
+
+export function fetchMovieReviews(id) {
+  return {
+    type: GET_MOVIE_REVIEWS_REQUESTED,
+    payload: id
+  }
+}
+
+export function fetchMovieRecommendations(id) {
+  return {
+    type: GET_MOVIE_RECOMMENDATIONS_REQUESTED,
     payload: id
   }
 }

@@ -1,0 +1,8 @@
+.heading-style {
+    color: black;
+    padding-inline: 20px;
+}
+
+.div-rating-style {
+    display: flex;
+}

@@ -25,6 +25,7 @@ import DiscoverExamplesScreen from "./views/FAQScreens/DiscoverExamples/Discover
 import MovieDetailsScreen from "./views/MovieScreens/MovieDetails/MovieDetailsScreen";
 import CastAndCrewScreen from "./views/MovieScreens/Cast&Crew/Cast&CrewScreen";
 import AlternativeTitlesScreen from "./views/MovieScreens/AlternativeTitles/AlternativeTitlesScreen";
+import MovieReviewsScreen from "./views/MovieScreens/MovieReviews/MovieReviewsScreen";
 
 export default function RoutesScreen() {
     return (
@@ -54,6 +55,7 @@ export default function RoutesScreen() {
             <Route path="/movie/:id" element={<MovieDetailsScreen/>} exact/>
             <Route path="/movie/:id/cast" element={<CastAndCrewScreen/>} exact/>
             <Route path="/movie/:id/titles" element={<AlternativeTitlesScreen/>} exact/>
+            <Route path="/movie/:id/reviews" element={<MovieReviewsScreen/>} exact/>
         </Routes>
     )
 }

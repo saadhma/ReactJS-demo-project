@@ -12,7 +12,7 @@
 
 export const BASE_URL = 'https://api.themoviedb.org/3';
 
-// MOVIES RELATED CONSTANTS
+// MOVIES RELATED URL LINKS
 
 export const STREAMMING_MOVIES_URL = `${BASE_URL}/trending/movie/week`;
 export const FREE_MOVIES_URL = `${BASE_URL}/movie/top_rated`;
@@ -23,7 +23,7 @@ export const UPCOMING_MOVIES_URL = `${BASE_URL}/movie/upcoming`;
 export const TOP_RATED_MOVIES_URL = `${BASE_URL}/movie/top_rated`;
 export const MOVIE_DETAILS_URL = `${BASE_URL}/movie/`;
 
-// TV SHOWS RELATED CONSTANTS
+// TV SHOWS RELATED URL LINKS
 
 export const POPULAR_TV_SHOWS_URL = `${BASE_URL}/tv/popular`;
 export const AIRING_TODAY_TV_SHOWS_URL = `${BASE_URL}/tv/airing_today`;

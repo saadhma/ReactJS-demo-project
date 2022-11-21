@@ -38,15 +38,15 @@ export default function CastAndCrewScreen() {
             </Grid>
             <Grid container style={styles.banner2Container}>
                 <Grid item xs={2} style={styles.imageItemStyle}>
-                    <img src={`${POSTER_IMAGE_BASE_URL}${movieDetailData.poster_path}`} alt=''
+                    <img src={`${POSTER_IMAGE_BASE_URL}${movieDetailData?.poster_path}`} alt=''
                         style={styles.imageStyle} />
                 </Grid>
                 <Grid item xs={10} style={styles.detailItemStyle}>
                     <Typography variant="h4" style={styles.textStyle}>
-                        {movieDetailData.original_title}
+                        {movieDetailData?.original_title}
                     </Typography>
                     <Typography variant="body1" style={styles.paragraphStyle}>
-                        {movieDetailData.release_date}
+                        {movieDetailData?.release_date}
                     </Typography>
                     <Typography variant="body1" style={styles.paragraphStyle}>
                         Back to main
@@ -55,12 +55,12 @@ export default function CastAndCrewScreen() {
             </Grid>
             <Grid container style={styles.sectionContainer}>
                 <Grid container style={{ width: '50%', display: 'flex', flexDirection: 'column'}}>
-                    <h2> Cast ({movieCreditsData.cast.length})</h2>
-                    <VerticalItemList dataList={movieCreditsData.cast}/>
+                    <h2> Cast ({movieCreditsData?.cast.length})</h2>
+                    <VerticalItemList dataList={movieCreditsData?.cast}/>
                 </Grid>
                 <Grid container style={{ width: '50%', display: 'flex', flexDirection: 'column'}}>
-                    <h2> Crew ({movieCreditsData.crew.length})</h2>
-                    <VerticalItemList dataList={movieCreditsData.crew}/>
+                    <h2> Crew ({movieCreditsData?.crew.length})</h2>
+                    <VerticalItemList dataList={movieCreditsData?.crew}/>
                 </Grid>
             </Grid>
         </React.Fragment>
@@ -88,7 +88,7 @@ const styles = {
         paddingBlock: 25
     },
     imageStyle: {
-        height: 100,
+        height: 130,
     },
     imageItemStyle: {
         paddingInline: 50,

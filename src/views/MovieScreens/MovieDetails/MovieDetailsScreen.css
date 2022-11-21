@@ -5,3 +5,25 @@
 .heading-style:hover {
     color: lightslategrey;
 }
+
+.keyword-button-style {
+    display: flex;
+    padding-block: 5px;
+    padding-inline: 5px;
+}
+
+.semi-heading-style {
+    color: black;
+    font-weight: 500;
+}
+
+.semi-heading-style:hover {
+    color: lightslategrey;
+}
+
+.recommendations-div-style {
+    display: flex;
+    flex-direction: column;
+    padding-block: 5px;
+    padding-inline: 5px;
+}
