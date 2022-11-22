@@ -24,7 +24,10 @@ import {
   GET_MOVIE_REVIEWS_FAILED,
   GET_MOVIE_RECOMMENDATIONS_REQUESTED,
   GET_MOVIE_RECOMMENDATIONS_SUCCESS,
-  GET_MOVIE_RECOMMENDATIONS_FAILED} from "../Actions/actionTypes";
+  GET_MOVIE_RECOMMENDATIONS_FAILED,
+  GET_MOVIE_MEDIA_VIDEOS_REQUESTED,
+  GET_MOVIE_MEDIA_VIDEOS_SUCCESS,
+  GET_MOVIE_MEDIA_VIDEOS_FAILED} from "../Actions/actionTypes";
 import { fromJS } from 'immutable';
 
 const initialState = fromJS({
@@ -41,6 +44,7 @@ const initialState = fromJS({
   movieKeywordsData: null,
   movieReviewsData: null,
   movieRecommendationsData: null,
+  movieMediaVideosData: null,
   error: null,
 });
 
@@ -48,7 +52,8 @@ export const moviesReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_MOVIES_REQUESTED || GET_POPULAR_MOVIES_REQUESTED || GET_NOW_PLAYING_MOVIES_REQUESTED || 
     GET_UPCOMING_MOVIES_REQUESTED || GET_TOP_RATED_MOVIES_REQUESTED || GET_MOVIE_DETAILS_REQUESTED || 
-    GET_MOVIE_CREDITS_REQUESTED || GET_MOVIE_KEYWORDS_REQUESTED || GET_MOVIE_REVIEWS_REQUESTED || GET_MOVIE_RECOMMENDATIONS_REQUESTED:
+    GET_MOVIE_CREDITS_REQUESTED || GET_MOVIE_KEYWORDS_REQUESTED || 
+    GET_MOVIE_REVIEWS_REQUESTED || GET_MOVIE_RECOMMENDATIONS_REQUESTED || GET_MOVIE_MEDIA_VIDEOS_REQUESTED:
       return state.set('loading', true)
     case GET_MOVIES_SUCCESS:
       return state.set('loading', false).set('streammingMovies', action.movies).set('freeMovies', action.freeMovies)
@@ -71,9 +76,11 @@ export const moviesReducer = (state = initialState, action) => {
         return state.set('loading', false).set('movieReviewsData', action.movieReviewsData)
     case GET_MOVIE_RECOMMENDATIONS_SUCCESS:
         return state.set('loading', false).set('movieRecommendationsData', action.movieRecommendationsData)  
+    case GET_MOVIE_MEDIA_VIDEOS_SUCCESS:
+        return state.set('loading', false).set('movieMediaVideosData', action.movieMediaVideosData)  
     case GET_MOVIES_FAILED || GET_POPULAR_MOVIES_FAILED || GET_NOW_PLAYING_MOVIES_FAILED || 
     GET_UPCOMING_MOVIES_FAILED || GET_TOP_RATED_MOVIES_FAILED || GET_MOVIE_CREDITS_FAILED || 
-    GET_MOVIE_KEYWORDS_FAILED || GET_MOVIE_REVIEWS_FAILED || GET_MOVIE_RECOMMENDATIONS_FAILED:
+    GET_MOVIE_KEYWORDS_FAILED || GET_MOVIE_REVIEWS_FAILED || GET_MOVIE_RECOMMENDATIONS_FAILED || GET_MOVIE_MEDIA_VIDEOS_FAILED:
       return state.set('loading', false).set('error', action.message)
     default:
       return state;

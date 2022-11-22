@@ -68,3 +68,8 @@
 .subtitle-style {
     color: lightslategrey;
 }
+
+.semi-subtitle-style {
+    color: lightslategrey;
+    padding-block: 5px;
+}

@@ -27,7 +27,35 @@ export default function HorizontalImageList({ dataList, type }) {
               {item.title || item.name}
             </div>
             <div className="subtitle-style">
-              {item.release_date || item.character}
+              {item.release_date || item.character || item.roles[0].character}
+            </div>
+          </ImageListItem>
+        ))}
+      </ImageList>
+    );
+  } else if (type === 'TV Characters') {
+    return (
+      <ImageList
+        sx={{
+          gridAutoFlow: "column",
+          justifyContent: 'space-between',
+          alignItems: 'space-between',
+          paddingInline: '25px'
+        }}
+      >
+        {dataList?.map((item) => (
+          <ImageListItem style={styles.container}>
+            <a href={"/movie/" + item.id}>
+              <img src={item.profile_path === null ? PersonImage : `${POSTER_IMAGE_BASE_URL}${item.poster_path || item.profile_path || item.backdrop_path}`} alt='' style={styles.imageItemStyle} />
+            </a>
+            <div className="title-style">
+              {item.title || item.name}
+            </div>
+            <div className="subtitle-style">
+              {item.release_date || item.character || item.roles[0].character}
+            </div>
+            <div className="semi-subtitle-style">
+              {item.roles[0].episode_count} Episodes
             </div>
           </ImageListItem>
         ))}

@@ -29,6 +29,7 @@ export const POPULAR_TV_SHOWS_URL = `${BASE_URL}/tv/popular`;
 export const AIRING_TODAY_TV_SHOWS_URL = `${BASE_URL}/tv/airing_today`;
 export const ON_AIR_TV_SHOWS_URL = `${BASE_URL}/tv/on_the_air`;
 export const TOP_RATED_TV_SHOWS_URL = `${BASE_URL}/tv/top_rated`;
+export const TV_SHOWS_DETAILS_URL = `${BASE_URL}/tv/`;
 
 // KEYS
 

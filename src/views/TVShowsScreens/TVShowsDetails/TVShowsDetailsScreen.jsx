@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import './MovieDetailsScreen.css';
+import './TVShowsDetailsScreen.css';
 import { HeaderComponent } from '../../../components/Header';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchMovieCredits, fetchMovieDetails, fetchMovieKeywords, fetchMovieMediaVideos, fetchMovieRecommendations, fetchMovieReviews } from '../../../store/Actions/moviesActions';
 import { Grid } from '@mui/material';
 import { Colors } from '../../../constants/Colors';
 import { POSTER_IMAGE_BASE_URL } from '../../../constants/Constants';
@@ -14,56 +13,45 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import GradeIcon from '@mui/icons-material/Grade';
 import Button from '@mui/material/Button';
+import { fetchTVShowsCredits, fetchTVShowsDetails, fetchTVShowsKeywords } from '../../../store/Actions/tvShowsActions';
 import HorizontalImageList from '../../../components/HorizontalImageList/HorizontalImageList';
 import Link from '@mui/material/Link';
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import YoutubeEmbedComponent from '../../../components/YoutubeEmbed/YoutubeEmbedComponent';
 
-export default function MovieDetailsScreen() {
+export default function TVShowsDetailsScreen() {
 
     const dispatch = useDispatch();
     const { id } = useParams();
 
-    const loadingData = useSelector(state => state.moviesReducer?.get('loading'));
-    const movieDetailData = useSelector(state => state.moviesReducer?.get('movieDetailsData'));
-    const movieKeywordsData = useSelector(state => state.moviesReducer?.get('movieKeywordsData'));
-    const movieCreditsData = useSelector(state => state.moviesReducer?.get('movieCreditsData'));
-    const movieReviewsData = useSelector(state => state.moviesReducer?.get('movieReviewsData'));
-    const movieRecommendationsData = useSelector(state => state.moviesReducer?.get('movieRecommendationsData'));
-    const movieMediaVideosData = useSelector(state => state.moviesReducer?.get('movieMediaVideosData'));
+    const loadingData = useSelector(state => state.tvShowsReducer?.get('loading'));
+    const tvShowsDetailsData = useSelector(state => state.tvShowsReducer?.get('tvShowsDetailsData'));
+    const tvShowsCreditsData = useSelector(state => state.tvShowsReducer?.get('tvShowsCreditsData'));
+    const tvShowsKeywordsData = useSelector(state => state.tvShowsReducer?.get('tvShowsKeywordsData'));
 
     useEffect(() => {
-        dispatch(fetchMovieDetails(`${id}`));
-        dispatch(fetchMovieCredits(`${id}`));
-        dispatch(fetchMovieKeywords(`${id}`));
-        dispatch(fetchMovieReviews(`${id}`));
-        dispatch(fetchMovieRecommendations(`${id}`));
-        dispatch(fetchMovieMediaVideos(`${id}`));
+        dispatch(fetchTVShowsDetails(`${id}`));
+        dispatch(fetchTVShowsCredits(`${id}`));
+        dispatch(fetchTVShowsKeywords(`${id}`));
     }, [dispatch]);
 
     console.log("loading", loadingData);
-    console.log("details data", movieDetailData);
-    console.log("keywords data", movieKeywordsData);
-    console.log("credits data", movieCreditsData);
-    console.log("reviews data", movieReviewsData);
-    console.log("recommendations data", movieRecommendationsData);
-    console.log("media videos data", movieMediaVideosData);
+    console.log("details data", tvShowsDetailsData);
+    console.log("credits data", tvShowsCreditsData);
+    console.log("keywords data", tvShowsKeywordsData);
 
     return (
         <React.Fragment>
             <HeaderComponent />
             <Grid container style={styles.bannerContainer}>
                 <Grid item xs={3} style={styles.imageItemStyle}>
-                    <img src={`${POSTER_IMAGE_BASE_URL}${movieDetailData?.poster_path}`} alt=''
+                    <img src={`${POSTER_IMAGE_BASE_URL}${tvShowsDetailsData?.poster_path}`} alt=''
                         style={styles.imageStyle} />
                 </Grid>
                 <Grid item xs={9} style={styles.detailItemStyle}>
                     <Typography variant="h4" style={styles.textStyle}>
-                        {movieDetailData?.original_title}
+                        {tvShowsDetailsData?.original_name}
                     </Typography>
                     <Typography variant="body1" style={styles.paragraphStyle}>
-                        {movieDetailData?.release_date}
+                        {tvShowsDetailsData?.first_air_date}
                     </Typography>
                     <Typography variant="body1" style={styles.paragraphStyle}>
                         Action
@@ -73,9 +61,9 @@ export default function MovieDetailsScreen() {
                             <Grid item>
                                 <div style={styles.percentageDivStyle}>
                                     <div style={styles.circleStyle}>
-                                        <p style={{ fontSize: 18 }}>{Math.round(movieDetailData?.vote_average / 0.1)}%</p>
+                                        <p style={{ fontSize: 18 }}>{Math.round(tvShowsDetailsData?.vote_average / 0.1)}%</p>
                                         <div style={styles.innerCircleStyle}>
-                                            <CircularProgres variant="determinate" value={Math.round(movieDetailData?.vote_average / 0.1)} style={{ color: Colors.lightGreenColor, width: 60, height: 60 }} />
+                                            <CircularProgres variant="determinate" value={Math.round(tvShowsDetailsData?.vote_average / 0.1)} style={{ color: Colors.lightGreenColor, width: 60, height: 60 }} />
                                         </div>
                                     </div>
                                 </div>
@@ -115,126 +103,50 @@ export default function MovieDetailsScreen() {
                         </Grid>
                     </Grid>
                     <Typography variant="h6" style={styles.paragraphStyle}>
-                        {movieDetailData?.tagline}
+                        {tvShowsDetailsData?.tagline}
                     </Typography>
                     <Typography variant="h6" style={styles.textStyle}>
                         Overview
                     </Typography>
                     <Typography variant="body1" style={styles.paragraphStyle}>
-                        {movieDetailData?.overview}
+                        {tvShowsDetailsData?.overview}
                     </Typography>
                 </Grid>
             </Grid>
             <Grid container style={styles.sectionContainer}>
                 <Grid container style={{ width: '75%', flexDirection: 'row', }}>
-                    <h2> Top Billed Cast </h2>
-                    <HorizontalImageList dataList={movieCreditsData?.cast} type={"Characters"} />
+                    <h2> Series Cast </h2>
+                    <HorizontalImageList dataList={tvShowsCreditsData?.cast} type={"TV Characters"} />
                     <Grid container>
                         <Link href={"/movie/" + id + "/cast"} underline="none">
                             <h3 className='heading-style'> Full Cast & Crew </h3>
                         </Link>
                     </Grid>
-                    <h2> Social </h2>
-                    {movieReviewsData?.results === [] ?
-                        <Typography variant="body1">
-                            We don't have any reviews for this movie. Would you like to write one?
-                        </Typography> :
-                        <Grid container sx={{ paddingInline: "20px", paddingBottom: "20px" }}>
-                            <Grid container sx={{ paddingInline: "30px", boxShadow: 2, borderRadius: 2 }}>
-                                <Grid item xs={1}>
-                                    <div style={styles.reviewDivStyle}>
-                                        <div style={styles.reviewerNameStyle}>
-                                            <Typography variant="h5">
-                                                {movieReviewsData?.results[0].author.substring(0, 1)}
-                                            </Typography>
-                                        </div>
-                                    </div>
-                                </Grid>
-                                <Grid item xs={11} style={styles.detailItemStyle}>
-                                    <Typography variant="h5">
-                                        A review by {movieReviewsData?.results[0].author}
-                                    </Typography>
-                                    <Typography variant="body1" sx={{ color: 'gray', fontSize: 12 }}>
-                                        Written by {movieReviewsData?.results[0].author} on {movieReviewsData?.results[0].created_at.substring(0, 10)}
-                                    </Typography>
-                                    <Typography variant="body1" sx={{ paddingBlock: "10px" }}>
-                                        {movieReviewsData?.results[0].content}
-                                    </Typography>
-                                </Grid>
-                            </Grid>
-                        </Grid>}
-                    <Link href={"/movie/" + id + "/reviews"} underline="none" sx={{ paddingInline: 3 }}>
-                        {movieReviewsData?.results.length > 1 ?
-                            <h3 className='semi-heading-style'> Read All Reviews </h3> : ""}
-                    </Link>
-                    <Grid container>
-                        <h2 className='recommendations-div-style'> Media </h2>
-                        <ImageList
-                            sx={{
-                                gridAutoFlow: "column",
-                                justifyContent: 'space-between',
-                                alignItems: 'space-between',
-                                paddingInline: '25px'
-                            }}>
-                            {movieMediaVideosData?.results.map((item) => (
-                                <ImageListItem style={styles.recommendationsContainer}>
-                                    <YoutubeEmbedComponent videoLink={item.key}/>
-                                </ImageListItem>
-                            ))}
-                        </ImageList>
-                    </Grid>
-                    <Grid container>
-                        <h2 className='recommendations-div-style'> Recommendations </h2>
-                        <ImageList
-                            sx={{
-                                gridAutoFlow: "column",
-                                justifyContent: 'space-between',
-                                alignItems: 'space-between',
-                                paddingInline: '25px'
-                            }}
-                        >
-                            {movieRecommendationsData?.results.map((item) => (
-                                <ImageListItem style={styles.recommendationsContainer}>
-                                    <a href={"/movie/" + item.id}>
-                                        <img src={`${POSTER_IMAGE_BASE_URL}${item.poster_path}`} alt='' style={styles.recommendationItemStyle} />
-                                    </a>
-                                    <div className='recommendations-paragraph-style'>
-                                        <div>
-                                            {item.title}
-                                        </div>
-                                        <div>
-                                            {Math.round(item.vote_average / 0.1)}%
-                                        </div>
-                                    </div>
-                                </ImageListItem>
-                            ))}
-                        </ImageList>
-                    </Grid>
                 </Grid>
                 <Grid container style={{ width: '25%' }}>
                     <Grid item sx={{ paddingInline: '20px' }}>
                         <h4> Status </h4>
-                        <p> {movieDetailData?.status} </p>
+                        {/* <p> {tvShowsDetailsData?.status} </p> */}
                         <h4> Original Language </h4>
-                        <p> {movieDetailData?.original_language} </p>
+                        {/* <p> {tvShowsDetailsData?.original_language} </p> */}
                         <h4> Budget </h4>
-                        <p> ${movieDetailData?.budget}.00 </p>
+                        {/* <p> ${tvShowsDetailsData?.budget}.00 </p> */}
                         <h4> Revenue </h4>
-                        <p> ${movieDetailData?.revenue}.00 </p>
+                        {/* <p> ${tvShowsDetailsData?.revenue}.00 </p> */}
                     </Grid>
                     <Grid item sx={{ paddingInline: '20px' }}>
                         <h4> Keywords </h4>
                         <div className='genre-section-style'>
-                            <KeywordButton name={movieKeywordsData?.keywords[0].name} />
-                            <KeywordButton name={movieKeywordsData?.keywords[1].name} />
+                            <KeywordButton name={tvShowsKeywordsData?.results[0].name} />
+                            <KeywordButton name={tvShowsKeywordsData?.results[1].name} />
                         </div>
                         <div className='genre-section-style'>
-                            <KeywordButton name={movieKeywordsData?.keywords[2].name} />
-                            <KeywordButton name={movieKeywordsData?.keywords[3].name} />
+                            <KeywordButton name={tvShowsKeywordsData?.results[2].name} />
+                            <KeywordButton name={tvShowsKeywordsData?.results[3].name} />
                         </div>
                         <div className='genre-section-style'>
-                            <KeywordButton name={movieKeywordsData?.keywords[4].name} />
-                            <KeywordButton name={movieKeywordsData?.keywords[5].name} />
+                            <KeywordButton name={tvShowsKeywordsData?.results[4].name} />
+                            <KeywordButton name={tvShowsKeywordsData?.results[5].name} />
                         </div>
                     </Grid>
                 </Grid>

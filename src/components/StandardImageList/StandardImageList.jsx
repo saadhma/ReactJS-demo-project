@@ -20,18 +20,20 @@ export default function StandardImageList({ dataList }) {
             {dataList?.map((item) => (
                 <div className="movie-box">
                     <ImageListItem style={styles.container} key={item.img}>
-                        <img
-                            src={`${POSTER_IMAGE_BASE_URL}${item.poster_path}`}
-                            style={styles.imageItemStyle}
-                            srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                            alt={item.title}
-                            loading="lazy"
-                        />
+                        <a href={"/tv/" + item.id}>
+                            <img
+                                src={`${POSTER_IMAGE_BASE_URL}${item.poster_path}`}
+                                style={styles.imageItemStyle}
+                                srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                alt={item.title}
+                                loading="lazy"
+                            />
+                        </a>
                         <div className="percentage-div-style">
                             <div class="circle">
-                                <p>{Math.round(item.vote_average/0.1)}%</p>
+                                <p>{Math.round(item.vote_average / 0.1)}%</p>
                                 <div class="inner-circle">
-                                    <CircularProgres variant="determinate" value={Math.round(item.vote_average/0.1)} style={{ color: Colors.lightGreenColor }} />
+                                    <CircularProgres variant="determinate" value={Math.round(item.vote_average / 0.1)} style={{ color: Colors.lightGreenColor }} />
                                 </div>
                             </div>
                         </div>
@@ -53,7 +55,7 @@ const styles = {
         color: Colors.headerColor,
     },
     imageItemStyle: {
-        height: 50,
+        height: 220,
         borderRadius: 5,
     },
     progressStyle: {
