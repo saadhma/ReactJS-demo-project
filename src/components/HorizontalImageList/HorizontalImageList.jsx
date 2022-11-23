@@ -61,7 +61,42 @@ export default function HorizontalImageList({ dataList, type }) {
         ))}
       </ImageList>
     );
-  } else {
+  }
+  if (type === 'TV Shows') {
+    return (
+      <ImageList
+        sx={{
+          gridAutoFlow: "column",
+          justifyContent: 'space-between',
+          alignItems: 'space-between',
+          paddingInline: '25px'
+        }}
+      >
+        {dataList?.map((item) => (
+          <ImageListItem style={styles.container}>
+            <a href={"/tv/" + item.id}>
+              <img src={`${POSTER_IMAGE_BASE_URL}${item.poster_path || item.profile_path}`} alt='' style={styles.imageItemStyle} />
+            </a>
+            <div className="percentage-div-style">
+              <div class="circle">
+                <p>{Math.round(item.vote_average / 0.1)}%</p>
+                <div class="inner-circle">
+                  <CircularProgres variant="determinate" value={Math.round(item.vote_average / 0.1)} style={{ color: Colors.lightGreenColor }} />
+                </div>
+              </div>
+            </div>
+            <div className="title-style">
+              {item.title || item.name}
+            </div>
+            <div className="subtitle-style">
+              {item.release_date || item.character || item.first_air_date}
+            </div>
+          </ImageListItem>
+        ))}
+      </ImageList>
+    );
+  }
+  else {
     return (
       <ImageList
         sx={{

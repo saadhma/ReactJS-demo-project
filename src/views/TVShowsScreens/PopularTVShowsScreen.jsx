@@ -18,10 +18,8 @@ export default function PopularTVShowsScreen() {
         dispatch(fetchPopularTVShows());
     }, [dispatch]);
 
-    console.log(popularTVShowsData.results);
-
     return (
-        <div>
+        <React.Fragment>
             <HeaderComponent />
             <div style={{ paddingTop: '75px', }}>
                 <Box sx={{ flexGrow: 1 }}>
@@ -51,6 +49,6 @@ export default function PopularTVShowsScreen() {
             </div>
         </Box >
             </div >
-        </div >
+        </React.Fragment>
     );
 }

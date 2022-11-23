@@ -41,3 +41,10 @@
     background-color: #1E2541;
     color: #FFF;
 }
+
+.search-icon-style {
+    height: 10%;
+    width: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+}

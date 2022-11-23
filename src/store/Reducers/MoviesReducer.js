@@ -57,7 +57,7 @@ export const moviesReducer = (state = initialState, action) => {
       return state.set('loading', true)
     case GET_MOVIES_SUCCESS:
       return state.set('loading', false).set('streammingMovies', action.movies).set('freeMovies', action.freeMovies)
-        .set('trendingMovies', action.trendingMovies)
+        .set('trendingMovies', action.trendingMovies).set('nowPlayingMovies', action.nowPlayingMovies)
     case GET_POPULAR_MOVIES_SUCCESS:
       return state.set('popularMovies', action.popularMovies)
     case GET_NOW_PLAYING_MOVIES_SUCCESS:

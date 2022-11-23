@@ -1,0 +1,30 @@
+.div-style {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px;
+    box-shadow: 2px 3px 2px #E5E4E2;
+    border: 1px solid #E5E4E2;
+    border-radius: 10px;
+}
+
+.benefit-section {
+    display: flex;
+    flex-direction: row;
+    padding-inline: 25px;
+    padding-block: 15px;   
+    justify-content: space-between;
+}
+
+.item-section {
+    background-color: gainsboro;
+    color: black;
+    border-radius: 7px;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 10px;
+    padding-block: 3px;
+}
+
+.benefit-section:hover {
+    background: lightgray;
+}

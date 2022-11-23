@@ -200,9 +200,10 @@ async function getMovieMediaVideos(id) {
 function* fetchMoviesData() {
     try {
         const streammingMovies = yield call(getStreammingMovies);
+        const nowPlayingMovies = yield call(getNowPlayingMovies);
         const freeMovies = yield call(getFreeMovies);
         const trendingMovies = yield call(getTrendingMovies);
-        yield put({ type: 'GET_MOVIES_SUCCESS', movies: streammingMovies, freeMovies: freeMovies, trendingMovies: trendingMovies });
+        yield put({ type: 'GET_MOVIES_SUCCESS', movies: streammingMovies, freeMovies: freeMovies, trendingMovies: trendingMovies, nowPlayingMovies: nowPlayingMovies });
     } catch (e) {
         yield put({ type: 'GET_MOVIES_FAILED', message: e.message });
     }

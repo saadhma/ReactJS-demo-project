@@ -31,6 +31,15 @@ export const ON_AIR_TV_SHOWS_URL = `${BASE_URL}/tv/on_the_air`;
 export const TOP_RATED_TV_SHOWS_URL = `${BASE_URL}/tv/top_rated`;
 export const TV_SHOWS_DETAILS_URL = `${BASE_URL}/tv/`;
 
+// SEARCH RELATED URL LINKS
+
+export const SEARCH_MOVIES_URL = `${BASE_URL}/search/movie`;
+export const SEARCH_TV_SHOWS_URL = `${BASE_URL}/search/tv`;
+export const SEARCH_PEOPLE_URL = `${BASE_URL}/search/person`;
+export const SEARCH_COLLECTION_URL = `${BASE_URL}/search/collection`;
+export const SEARCH_COMPANIES_URL = `${BASE_URL}/search/company`;
+export const SEARCH_KEYWORDS_URL = `${BASE_URL}/search/keyword`;
+
 // KEYS
 
 export const API_KEY = '3161dc5d20e56e746f849ecd2466c1bf';

@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import { Colors } from '../../constants/Colors';
 import logo from '../../assets/movie-portal-logo.svg';
 import plusIcon from '../../assets/plus-icon.svg';
+import searchIcon from '../../assets/searchIcon.svg';
 import { Box } from '@mui/system';
 import ButtonWithPopUpMenu from '../PopUpMenu/PopUpMenu.tsx';
 
@@ -29,7 +30,7 @@ export default function HeaderComponent() {
                         />
                     </a>
                 </Box>
-                <Box sx={{ width: '60%', flexDirection: 'row' }}>
+                <Box sx={{ width: '55%', flexDirection: 'row' }}>
                     <ButtonWithPopUpMenu items={4} buttonName={'Movies'} />
                     <ButtonWithPopUpMenu items={4} buttonName={'TV Shows'} />
                     <ButtonWithPopUpMenu items={1} buttonName={'People'} />
@@ -73,6 +74,14 @@ export default function HeaderComponent() {
                     >
                         Join TMDB
                     </Link>
+                </Box>
+                <Box>
+                    <a href='/SearchScreen'>
+                        <img className='search-icon-style'
+                            src={searchIcon}
+                            alt="search"
+                        />
+                    </a>
                 </Box>
             </Toolbar>
         </AppBar >

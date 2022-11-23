@@ -140,14 +140,14 @@ export default function TVShowsDetailsScreen() {
                             <KeywordButton name={tvShowsKeywordsData?.results[0].name} />
                             <KeywordButton name={tvShowsKeywordsData?.results[1].name} />
                         </div>
-                        <div className='genre-section-style'>
+                        {/* <div className='genre-section-style'>
                             <KeywordButton name={tvShowsKeywordsData?.results[2].name} />
                             <KeywordButton name={tvShowsKeywordsData?.results[3].name} />
                         </div>
                         <div className='genre-section-style'>
                             <KeywordButton name={tvShowsKeywordsData?.results[4].name} />
                             <KeywordButton name={tvShowsKeywordsData?.results[5].name} />
-                        </div>
+                        </div> */}
                     </Grid>
                 </Grid>
             </Grid>
