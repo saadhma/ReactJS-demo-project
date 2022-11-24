@@ -118,10 +118,34 @@ export default function TVShowsDetailsScreen() {
                     <h2> Series Cast </h2>
                     <HorizontalImageList dataList={tvShowsCreditsData?.cast} type={"TV Characters"} />
                     <Grid container>
-                        <Link href={"/movie/" + id + "/cast"} underline="none">
+                        <Link href={"/tv/" + id + "/cast"} underline="none">
                             <h3 className='heading-style'> Full Cast & Crew </h3>
                         </Link>
                     </Grid>
+                    <h2> Current Season </h2>
+                    {tvShowsDetailsData?.seasons.length === 0 ?
+                        <Typography variant="body1">
+                            No seasons data avaiable.
+                        </Typography> :
+                        <Grid container sx={{ paddingInline: "20px", paddingBottom: "20px" }}>
+                            <Grid container sx={{ paddingRight: "30px", boxShadow: 2, borderRadius: 2 }}>
+                                {<Grid item xs={2}>
+                                    <img src={`${POSTER_IMAGE_BASE_URL}${tvShowsDetailsData?.seasons[0].poster_path}`} alt=''
+                                        style={styles.posterImageStyle} />
+                                </Grid>}
+                                <Grid item xs={10} style={styles.detailItemStyle}>
+                                    <Typography variant="h5">
+                                        {tvShowsDetailsData?.seasons[0].name}
+                                    </Typography>
+                                    <Typography variant="body1" sx={{ paddingBlock: "10px" }}>
+                                        {tvShowsDetailsData?.seasons[0].episode_count}
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        </Grid>}
+                    <Link href={"/tv/" + id + "/seasons"} underline="none" sx={{ paddingInline: 3 }}>
+                        <h3 className='semi-heading-style'> View All Seasons </h3>
+                    </Link>
                 </Grid>
                 <Grid container style={{ width: '25%' }}>
                     <Grid item sx={{ paddingInline: '20px' }}>
@@ -136,18 +160,60 @@ export default function TVShowsDetailsScreen() {
                     </Grid>
                     <Grid item sx={{ paddingInline: '20px' }}>
                         <h4> Keywords </h4>
-                        <div className='genre-section-style'>
-                            <KeywordButton name={tvShowsKeywordsData?.results[0].name} />
-                            <KeywordButton name={tvShowsKeywordsData?.results[1].name} />
-                        </div>
-                        {/* <div className='genre-section-style'>
-                            <KeywordButton name={tvShowsKeywordsData?.results[2].name} />
-                            <KeywordButton name={tvShowsKeywordsData?.results[3].name} />
-                        </div>
-                        <div className='genre-section-style'>
-                            <KeywordButton name={tvShowsKeywordsData?.results[4].name} />
-                            <KeywordButton name={tvShowsKeywordsData?.results[5].name} />
-                        </div> */}
+                        {tvShowsKeywordsData?.results?.length >= 1 ?
+                            <div className='genre-section-style'>
+                                <KeywordButton name={tvShowsKeywordsData?.results[0].name} />
+                                <KeywordButton name={tvShowsKeywordsData?.results[1].name} />
+                            </div> :
+                            <div className='genre-section-style'>
+                                <KeywordButton name={tvShowsKeywordsData?.results[0].name} />
+                            </div>
+                        }
+                        {tvShowsKeywordsData?.results?.length >= 3 ?
+                            <div className='genre-section-style'>
+                                <KeywordButton name={tvShowsKeywordsData?.results[2].name} />
+                                <KeywordButton name={tvShowsKeywordsData?.results[3].name} />
+                            </div> :
+                            <div className='genre-section-style'>
+                                <KeywordButton name={tvShowsKeywordsData?.results[2].name} />
+                            </div>
+                        }
+                        {/* {tvShowsKeywordsData?.results?.length >= 5 ?
+                            <div className='genre-section-style'>
+                                <KeywordButton name={tvShowsKeywordsData?.results[4].name} />
+                                <KeywordButton name={tvShowsKeywordsData?.results[5].name} />
+                            </div> :
+                            <div className='genre-section-style'>
+                                <KeywordButton name={tvShowsKeywordsData?.results[4].name} />
+                            </div>
+                        } */}
+                        {/* {tvShowsKeywordsData?.results?.length >= 7 ?
+                            <div className='genre-section-style'>
+                                <KeywordButton name={tvShowsKeywordsData?.results[6].name} />
+                                <KeywordButton name={tvShowsKeywordsData?.results[7].name} />
+                            </div> :
+                            <div className='genre-section-style'>
+                                <KeywordButton name={tvShowsKeywordsData?.results[6].name} />
+                            </div>
+                        }
+                        {tvShowsKeywordsData?.results?.length >= 9 ?
+                            <div className='genre-section-style'>
+                                <KeywordButton name={tvShowsKeywordsData?.results[8].name} />
+                                <KeywordButton name={tvShowsKeywordsData?.results[9].name} />
+                            </div> :
+                            <div className='genre-section-style'>
+                                <KeywordButton name={tvShowsKeywordsData?.results[8].name} />
+                            </div>
+                        }
+                        {tvShowsKeywordsData?.results?.length >= 11 ?
+                            <div className='genre-section-style'>
+                                <KeywordButton name={tvShowsKeywordsData?.results[10].name} />
+                                <KeywordButton name={tvShowsKeywordsData?.results[11].name} />
+                            </div> :
+                            <div className='genre-section-style'>
+                                <KeywordButton name={tvShowsKeywordsData?.results[10].name} />
+                            </div>
+                        } */}
                     </Grid>
                 </Grid>
             </Grid>
@@ -278,5 +344,10 @@ const styles = {
         borderRadius: 10,
         cursor: 'pointer',
         objectFit: 'cover'
+    },
+    posterImageStyle: {
+        height: 200,
+        borderTopLeftRadius: 10,
+        borderBottomLeftRadius: 10,
     },
 }

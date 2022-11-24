@@ -28,6 +28,8 @@ import AlternativeTitlesScreen from "./views/MovieScreens/AlternativeTitles/Alte
 import MovieReviewsScreen from "./views/MovieScreens/MovieReviews/MovieReviewsScreen";
 import TVShowsDetailsScreen from "./views/TVShowsScreens/TVShowsDetails/TVShowsDetailsScreen";
 import SearchScreen from "./views/SearchScreen/SearchScreen";
+import TVShowsCastAndCrewScreen from "./views/TVShowsScreens/Cast&Crew/TVShowsCast&CrewScreen";
+import TVShowsSeasonsScreen from "./views/TVShowsScreens/TVShowsSeasons/TVShowsSeasonsScreen";
 
 export default function RoutesScreen() {
     return (
@@ -60,6 +62,8 @@ export default function RoutesScreen() {
             <Route path="/movie/:id/titles" element={<AlternativeTitlesScreen/>} exact/>
             <Route path="/movie/:id/reviews" element={<MovieReviewsScreen/>} exact/>
             <Route path="/tv/:id" element={<TVShowsDetailsScreen/>} exact/>
+            <Route path="/tv/:id/cast" element={<TVShowsCastAndCrewScreen/>} exact/>
+            <Route path="/tv/:id/seasons" element={<TVShowsSeasonsScreen/>} exact/>
         </Routes>
     )
 }

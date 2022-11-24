@@ -27,4 +27,17 @@
 
 .benefit-section:hover {
     background: lightgray;
+    cursor: pointer;
+}
+
+.spacer-style {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.line-style {
+    flex: 1;
+    height: 1px;
+    background-color: lightgray;
 }

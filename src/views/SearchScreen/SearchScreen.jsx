@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './SearchScreen.css';
 import { HeaderComponent } from '../../components/Header';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,8 +10,21 @@ import { Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { fetchSearchCollection, fetchSearchCompanies, fetchSearchKeywords, fetchSearchMovies, fetchSearchPeople, fetchSearchTVShows } from '../../store/Actions/searchActions';
 import { POSTER_IMAGE_BASE_URL } from '../../constants/Constants';
+import PersonImage from '../../assets/person-img.svg';
+import PosterImage from '../../assets/posterImage.svg';
 
 export default function SearchScreen() {
+
+    const [options, setOptions] = useState([
+        { id: "1", name: "Movies", selected: true },
+        { id: "2", name: "People", selected: false },
+        { id: "3", name: "Keywords", selected: false },
+        { id: "4", name: "TV Shows", selected: false },
+        { id: "5", name: "Collections", selected: false },
+        { id: "6", name: "Companies", selected: false }
+    ]);
+
+    const [selectedId, setSelectedId] = useState("1");
 
     const dispatch = useDispatch();
     const searchMoviesData = useSelector(state => state.searchReducer?.get('searchMoviesList'));
@@ -24,9 +37,9 @@ export default function SearchScreen() {
     useEffect(() => {
         dispatch(fetchSearchMovies("1899"));
         dispatch(fetchSearchTVShows("1899"));
-        dispatch(fetchSearchPeople("1899"));
-        dispatch(fetchSearchCollection("1899"));
-        dispatch(fetchSearchCompanies("1899"));
+        dispatch(fetchSearchPeople("black adam"));
+        dispatch(fetchSearchCollection("18"));
+        dispatch(fetchSearchCompanies("18"));
         dispatch(fetchSearchKeywords("18"));
     }, [dispatch]);
 
@@ -60,58 +73,211 @@ export default function SearchScreen() {
                         <Box
                             sx={{
                                 background: Colors.blueColor, color: Colors.whiteColor,
-                                paddingInline: '25px', paddingBlock: '15px', borderRadius: '10px'
+                                paddingInline: '25px', paddingBlock: '15px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px'
                             }}>
                             <Typography sx={{ fontSize: '20px', fontWeight: 'bold' }}>
                                 Search Results
                             </Typography>
                         </Box>
                         <Box sx={{ color: Colors.blackColor, paddingBlock: '15px', }}>
-                            <OptionSection title={"Movies"} count={searchMoviesData?.results?.length} />
-                            <OptionSection title={"TV Shows"} count={searchTVShowsData?.results?.length} />
-                            <OptionSection title={"People"} count={searchPeopleData?.results?.length} />
-                            <OptionSection title={"Collections"} count={searchCollectionData?.results?.length} />
-                            <OptionSection title={"Companies"} count={searchCompaniesData?.results?.length} />
-                            <OptionSection title={"Keywords"} count={searchKeywordsData?.results?.length} />
+                            {options.map((item) => (
+                                <div className='benefit-section'
+                                    style={{
+                                        color: Colors.blackColor,
+                                        background: item.selected ? Colors.greyColor : Colors.whiteColor,
+                                    }}
+                                    onClick={() => {
+                                        setSelectedId(item.id)
+                                        setOptions(
+                                            options
+                                                .map((todo) => (
+                                                    todo.id === item.id
+                                                        ? { ...todo, selected: true }
+                                                        : { ...todo, selected: false }
+                                                )
+                                                ));
+                                    }}>
+                                    {item.name}
+                                    <div className='item-section'>
+                                        {item.id === "1" ?
+                                            searchMoviesData?.results?.length :
+                                            item.id === "2" ?
+                                                searchPeopleData?.results?.length :
+                                                item.id === "3" ?
+                                                    searchKeywordsData?.results?.length :
+                                                    item.id === "4" ?
+                                                        searchTVShowsData?.results?.length :
+                                                        item.id === "5" ?
+                                                            searchCollectionData?.results?.length :
+                                                            searchCompaniesData?.results?.length
+                                        }
+                                    </div>
+                                </div>
+                            ))}
                         </Box>
                     </div>
                 </Grid>
                 <Grid item xs={9.5}>
-                    <Grid container style={{ display: 'flex', flexDirection: 'column', paddingLeft: "30px" }}>
-                        {searchMoviesData?.results?.map((item) => (
-                            <Grid container sx={{ paddingRight: "20px", marginBlock: "10px", boxShadow: 2, borderRadius: 2 }}>
-                                <Grid item xs={1.5}>
-                                    <img src={`${POSTER_IMAGE_BASE_URL}${item?.poster_path}`} alt=''
-                                        style={styles.imageStyle} />
-                                </Grid>
-                                <Grid item xs={10.5} style={styles.detailItemStyle}>
-                                    <Typography variant="h6" style={styles.headingTextStyle}>
-                                        {item.title}
-                                    </Typography>
-                                    <Typography variant="h7" style={styles.subHeadingTextStyle}>
-                                        {item.release_date}
-                                    </Typography>
-                                    <Typography variant="body1" sx={{ paddingBlock: "10px" }}>
-                                        {item.overview}
-                                    </Typography>
-                                </Grid>
-                            </Grid>
-                        ))}
-                    </Grid>
+                    {selectedId === "1" ?
+                        <Grid container style={{ display: 'flex', flexDirection: 'column', paddingLeft: "30px" }}>
+                            {
+                                searchMoviesData?.results?.length === 0 ?
+                                    <Typography variant="body1" sx={{ paddingBlock: "15px" }}>
+                                        There are no movies that matched your query.
+                                    </Typography> :
+                                    searchMoviesData?.results?.map((item) => (
+                                        <Grid container sx={{ height: "150px", paddingRight: "20px", marginBlock: "10px", boxShadow: 2, borderRadius: 2 }}>
+                                            <Grid item xs={1.5}>
+                                                <img src={`${POSTER_IMAGE_BASE_URL}${item?.poster_path}`} alt=''
+                                                    style={styles.imageStyle} />
+                                            </Grid>
+                                            <Grid item xs={10.5} style={styles.detailItemStyle}>
+                                                <Typography variant="h6" style={styles.headingTextStyle}>
+                                                    {item.title}
+                                                </Typography>
+                                                <Typography variant="h7" style={styles.subHeadingTextStyle}>
+                                                    {item.release_date}
+                                                </Typography>
+                                                <Typography variant="body1" sx={{ paddingBlock: "15px" }}>
+                                                    {item.overview?.length > 225 ? `${item.overview?.substring(0, 225)}......` : item.overview}
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>
+                                    ))
+                            }
+                        </Grid> :
+                        selectedId === "2" ?
+                            <Grid container style={{ display: 'flex', flexDirection: 'column', paddingLeft: "30px" }}>
+                                {
+                                    searchPeopleData?.results?.length === 0 ?
+                                        <Typography variant="body1" sx={{ paddingBlock: "15px" }}>
+                                            There is no data that matched your query.
+                                        </Typography> :
+                                        searchPeopleData?.results?.map((item) => (
+                                            <Grid container sx={{ height: "150px", paddingRight: "20px", marginBlock: "10px" }}>
+                                                <Grid item xs={2}>
+                                                    <img src={PersonImage} alt=''
+                                                        style={styles.imageStyle} />
+                                                </Grid>
+                                                <Grid item xs={10} style={styles.detailItemStyle}>
+                                                    <Typography variant="h6" style={styles.headingTextStyle}>
+                                                        {item.name}
+                                                    </Typography>
+                                                    <Typography variant="h7">
+                                                        {item.known_for_department}
+                                                    </Typography>
+                                                    <Typography variant="body1" sx={{ paddingBlock: "15px" }}>
+                                                        {item.known_for?.length > 0 ? `${item.known_for[0].title}` : ""}
+                                                    </Typography>
+                                                </Grid>
+                                            </Grid>
+                                        ))
+                                }
+                            </Grid> :
+                            selectedId === "3" ?
+                                <Grid container style={{ display: 'flex', flexDirection: 'column', paddingLeft: "30px" }}>
+                                    {
+                                        searchKeywordsData?.results?.length === 0 ?
+                                            <Typography variant="body1" sx={{ paddingBlock: "15px" }}>
+                                                There is no data that matched your query.
+                                            </Typography> :
+                                            searchKeywordsData?.results?.map((item) => (
+                                                <Grid container sx={{ paddingLeft: "20px", marginBlock: "10px" }}>
+                                                    <Grid item>
+                                                        <Typography variant="body1">
+                                                            {item.name}
+                                                        </Typography>
+                                                    </Grid>
+                                                </Grid>
+                                            ))
+                                    }
+                                </Grid> :
+                                selectedId === "4" ?
+                                    <Grid container style={{ display: 'flex', flexDirection: 'column', paddingLeft: "30px" }}>
+                                        {
+                                            searchTVShowsData?.results?.length === 0 ?
+                                                <Typography variant="body1" sx={{ paddingBlock: "15px" }}>
+                                                    There are no movies that matched your query.
+                                                </Typography> :
+                                                searchTVShowsData?.results?.map((item) => (
+                                                    <Grid container sx={{ height: "150px", paddingRight: "20px", marginBlock: "10px", boxShadow: 2, borderRadius: 2 }}>
+                                                        <Grid item xs={1.5}>
+                                                            <img src={`${POSTER_IMAGE_BASE_URL}${item?.poster_path}`} alt=''
+                                                                style={styles.imageStyle} />
+                                                        </Grid>
+                                                        <Grid item xs={10.5} style={styles.detailItemStyle}>
+                                                            <Typography variant="h6" style={styles.headingTextStyle}>
+                                                                {item.name}
+                                                            </Typography>
+                                                            <Typography variant="h7" style={styles.subHeadingTextStyle}>
+                                                                {item.first_air_date}
+                                                            </Typography>
+                                                            <Typography variant="body1" sx={{ paddingBlock: "15px" }}>
+                                                                {item.overview?.length > 225 ? `${item.overview?.substring(0, 225)}......` : item.overview}
+                                                            </Typography>
+                                                        </Grid>
+                                                    </Grid>
+                                                ))
+                                        }
+                                    </Grid> :
+                                    selectedId === "5" ?
+                                        <Grid container style={{ display: 'flex', flexDirection: 'column', paddingLeft: "30px" }}>
+                                            {
+                                                searchCollectionData?.results?.length === 0 ?
+                                                    <Typography variant="body1" sx={{ paddingBlock: "15px" }}>
+                                                        There are no movies that matched your query.
+                                                    </Typography> :
+                                                    searchCollectionData?.results?.map((item) => (
+                                                        <Grid container sx={{ height: "150px", paddingRight: "20px", marginBlock: "10px", boxShadow: 2, borderRadius: 2 }}>
+                                                            <Grid item xs={2}>
+                                                                <img src={item.poster_path === null ? PosterImage : `${POSTER_IMAGE_BASE_URL}${item?.poster_path}`} alt=''
+                                                                    style={styles.posterImageStyle} />
+                                                            </Grid>
+                                                            <Grid item xs={10} style={styles.collectionDetailItemStyle}>
+                                                                <Typography variant="h6" style={styles.headingTextStyle}>
+                                                                    {item.name}
+                                                                </Typography>
+                                                                {item.overview === "" ? null :
+                                                                    <Typography variant="body1" sx={{ paddingBlock: "15px" }}>
+                                                                        {item.overview?.length > 225 ? `${item.overview?.substring(0, 225)}......` : item.overview}
+                                                                    </Typography>
+                                                                }
+                                                            </Grid>
+                                                        </Grid>
+                                                    ))
+                                            }
+                                        </Grid> :
+                                        selectedId === "6" ?
+                                            <Grid container style={{ display: 'flex', flexDirection: 'column', paddingLeft: "30px" }}>
+                                                {
+                                                    searchCompaniesData?.results?.length === 0 ?
+                                                        <Typography variant="body1" sx={{ paddingBlock: "15px" }}>
+                                                            There is no data that matched your query.
+                                                        </Typography> :
+                                                        searchCompaniesData?.results?.map((item) => (
+                                                            <div>
+                                                                <Grid container sx={{ paddingLeft: "35px", marginBlock: "10px" }}>
+                                                                    <Grid item>
+                                                                        <Typography variant="body1">
+                                                                            {item.name}
+                                                                        </Typography>
+                                                                    </Grid>
+                                                                </Grid>
+                                                                <div className='spacer-style'>
+                                                                    <div className='line-style' /></div>
+                                                                <div></div>
+                                                            </div>
+                                                        ))
+                                                }
+                                            </Grid> :
+                                            <Grid container style={{ display: 'flex', flexDirection: 'column', paddingLeft: "30px" }}>
+                                                <Typography variant="body1" sx={{ paddingBlock: "15px" }}>
+                                                    There is no data that matched your query.
+                                                </Typography>
+                                            </Grid>}
                 </Grid>
             </Grid>
         </React.Fragment >
-    );
-}
-
-function OptionSection({ title, count }) {
-    return (
-        <div className='benefit-section'>
-            {title}
-            <div className='item-section'>
-                {count}
-            </div>
-        </div>
     );
 }
 
@@ -138,8 +304,12 @@ const styles = {
         justifyContent: 'center',
     },
     detailItemStyle: {
-        paddingBlock: 20,
-        paddingRight: 20,
+        paddingBlock: 15,
+        paddingRight: 10,
+    },
+    collectionDetailItemStyle: {
+        paddingBlock: 30,
+        paddingRight: 10,
     },
     textStyle: {
         fontWeight: 'bold',
@@ -158,6 +328,13 @@ const styles = {
     },
     imageStyle: {
         height: 150,
-        borderRadius: 10,
+        borderTopLeftRadius: 10,
+        borderBottomLeftRadius: 10,
     },
+    posterImageStyle: {
+        height: 150,
+        backgroundColor: Colors.greyColor,
+        borderTopLeftRadius: 10,
+        borderBottomLeftRadius: 10,
+    }
 }
