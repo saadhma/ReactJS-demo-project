@@ -107,6 +107,21 @@ async function getTVShowsKeywords(id) {
     }
 }
 
+async function getTVShowsSeasonDetails(id, seasonNumber) {
+    const tvShowsSeasonDetailsUrl = `${TV_SHOWS_DETAILS_URL}${id.payload.id}/season/${id.payload.seasonNumber}?api_key=${API_KEY}`;
+    try {
+        const response = await fetch(tvShowsSeasonDetailsUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
 function* fetchPopularTVShowsData() {
     try {
         const popularTVShowsData = yield call(getPopularTVShows);
@@ -170,6 +185,15 @@ function* fetchTVShowsKeywordsData(id) {
     }
 }
 
+function* fetchTVShowsSeasonDetailsData(id, seasonNumber) {
+    try {
+        const tvShowsSeasonDetailsData = yield call(getTVShowsSeasonDetails, id, seasonNumber);
+        yield put({ type: 'GET_TV_SHOWS_SEASON_DETAILS_SUCCESS', tvShowsSeasonDetailsData: tvShowsSeasonDetailsData });
+    } catch (e) {
+        yield put({ type: 'GET_TV_SHOWS_SEASON_DETAILS_FAILED', message: e.message });
+    }
+}
+
 function* tvShowsSaga() {
     yield takeEvery('GET_POPULAR_TV_SHOWS_REQUESTED', fetchPopularTVShowsData);
     yield takeEvery('GET_AIRING_TODAY_TV_SHOWS_REQUESTED', fetchAiringTodayTVShowsData);
@@ -178,6 +202,7 @@ function* tvShowsSaga() {
     yield takeEvery('GET_TV_SHOWS_DETAILS_REQUESTED', fetchTVShowsDetailsData);
     yield takeEvery('GET_TV_SHOWS_CREDITS_REQUESTED', fetchTVShowsCreditsData);
     yield takeEvery('GET_TV_SHOWS_KEYWORDS_REQUESTED', fetchTVShowsKeywordsData);
+    yield takeEvery('GET_TV_SHOWS_SEASON_DETAILS_REQUESTED', fetchTVShowsSeasonDetailsData);
 }
 
 export default tvShowsSaga;

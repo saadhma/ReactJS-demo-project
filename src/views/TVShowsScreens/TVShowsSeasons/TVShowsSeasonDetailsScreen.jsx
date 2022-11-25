@@ -7,21 +7,25 @@ import { POSTER_IMAGE_BASE_URL } from '../../../constants/Constants';
 import { useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import ButtonWithPopUpMenu from '../../../components/PopUpMenu/PopUpMenu.tsx';
-import { fetchTVShowsDetails } from '../../../store/Actions/tvShowsActions';
+import { fetchTVShowsDetails, fetchTVShowsSeasonDetails } from '../../../store/Actions/tvShowsActions';
+import PosterImage from '../../../assets/posterImage.svg';
 
 export default function TVShowsSeasonDetailsScreen() {
-
     const dispatch = useDispatch();
-    const { id } = useParams();
+    const { id, index } = useParams();
 
     const tvShowsDetailsData = useSelector(state => state.tvShowsReducer?.get('tvShowsDetailsData'));
+    const tvShowsSeasonDetailsData = useSelector(state => state.tvShowsReducer?.get('tvShowsSeasonDetailsData'));
 
     useEffect(() => {
         dispatch(fetchTVShowsDetails(`${id}`));
-
+        dispatch(fetchTVShowsSeasonDetails(id, index));
     }, [dispatch]);
 
-    console.log("details data", tvShowsDetailsData?.seasons);
+    console.log("id", id);
+    console.log("id", index);
+    console.log("details data", tvShowsDetailsData);
+    console.log("season details data", tvShowsSeasonDetailsData);
 
     return (
         <React.Fragment>
@@ -51,30 +55,29 @@ export default function TVShowsSeasonDetailsScreen() {
             </Grid>
             <Grid container style={styles.sectionContainer}>
                 <Grid container style={{ display: 'flex', flexDirection: 'column' }}>
-                    <Grid container sx={{ paddingInline: "10px" }}>
-                        {tvShowsDetailsData?.seasons?.map((item) => (
-                            <Grid container sx={{ marginBlock: "10px", boxShadow: 2, borderRadius: 2 }}>
-                                <Grid item xs={1.5}>
-                                    <img src={`${POSTER_IMAGE_BASE_URL}${item.poster_path}`} alt=''
-                                        style={styles.posterImageStyle} />
-                                </Grid>
-                                <Grid item xs={10.5} style={styles.detailItemStyle}>
-                                    <Typography variant="h4">
-                                        {item.name}
-                                    </Typography>
-                                    <Typography variant="body1" sx={{ paddingBlock: "10px" }}>
-                                        {item.air_date.substring(0, 4)} | {item.episode_count} Episodes
-                                    </Typography>
-                                    <Typography variant="body1">
-                                        Season {item.season_number} of {tvShowsDetailsData?.name} premiered on {item.air_date}
-                                    </Typography>
-                                    <Typography variant="body1" sx={{ paddingBlock: "10px" }}>
-                                        {item.overview}
-                                    </Typography>
-                                </Grid>
+                    <Typography variant="h6">
+                        Episodes {tvShowsSeasonDetailsData?.episodes?.length}
+                    </Typography>
+                    {tvShowsSeasonDetailsData?.episodes?.map((item, index) => (
+                        <Grid container sx={{ marginBlock: "10px", boxShadow: 2, borderRadius: 2 }}>
+                            <Grid item xs={2}>
+                                {item.still_path === null ?
+                                    <div style={styles.posterDivStyle}>
+                                        <img src={PosterImage} alt='' style={{ width: '50px', height: '50px' }} />
+                                    </div> :
+                                    <img src={`${POSTER_IMAGE_BASE_URL}${item.still_path}`} alt=''
+                                        style={styles.posterImageStyle} />}
                             </Grid>
-                        ))}
-                    </Grid>
+                            <Grid item xs={10} style={styles.detailItemStyle}>
+                                <Typography variant="h6">
+                                    {index + 1} {item.name}
+                                </Typography>
+                                <Typography variant="body1" sx={{ paddingBlock: "10px" }}>
+                                    {item.overview}
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                    ))}
                 </Grid>
             </Grid>
         </React.Fragment>
@@ -110,9 +113,12 @@ const styles = {
     },
     detailItemStyle: {
         fontWeight: 'bold',
-        paddingRight: 50,
+        paddingInline: 30,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center'
     },
-    bannerDetailItemStyle : {
+    bannerDetailItemStyle: {
         paddingRight: 50,
         paddingBlock: 30,
     },
@@ -162,7 +168,21 @@ const styles = {
         marginInline: 20
     },
     posterImageStyle: {
-        height: 200,
-        borderRadius: 10,
+        height: 130,
+        width: 200,
+        borderTopLeftRadius: 10,
+        borderBottomLeftRadius: 10,
+        objectFit: 'cover'
+    },
+    posterDivStyle: {
+        display: 'flex',
+        background: Colors.greyColor,
+        height: 130,
+        width: 200,
+        borderTopLeftRadius: 10,
+        borderBottomLeftRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'pointer'
     },
 }
