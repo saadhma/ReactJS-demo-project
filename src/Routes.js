@@ -31,6 +31,7 @@ import SearchScreen from "./views/SearchScreen/SearchScreen";
 import TVShowsCastAndCrewScreen from "./views/TVShowsScreens/Cast&Crew/TVShowsCast&CrewScreen";
 import TVShowsSeasonsScreen from "./views/TVShowsScreens/TVShowsSeasons/TVShowsSeasonsScreen";
 import TVShowsSeasonDetailsScreen from "./views/TVShowsScreens/TVShowsSeasons/TVShowsSeasonDetailsScreen";
+import TVShowReviewsScreen from "./views/TVShowsScreens/TVShowReviews/TVShowReviewsScreen";
 
 export default function RoutesScreen() {
     return (
@@ -66,6 +67,7 @@ export default function RoutesScreen() {
             <Route path="/tv/:id/cast" element={<TVShowsCastAndCrewScreen/>} exact/>
             <Route path="/tv/:id/seasons" element={<TVShowsSeasonsScreen/>} exact/>
             <Route path="/tv/:id/season/:index" element={<TVShowsSeasonDetailsScreen/>} exact/>
+            <Route path="/tv/:id/reviews" element={<TVShowReviewsScreen/>} exact/>
         </Routes>
     )
 }

@@ -13,7 +13,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import GradeIcon from '@mui/icons-material/Grade';
 import Button from '@mui/material/Button';
-import { fetchTVShowsCredits, fetchTVShowsDetails, fetchTVShowsKeywords } from '../../../store/Actions/tvShowsActions';
+import { fetchTVShowsCredits, fetchTVShowsDetails, fetchTVShowsKeywords, fetchTVShowsSeasonReviews } from '../../../store/Actions/tvShowsActions';
 import HorizontalImageList from '../../../components/HorizontalImageList/HorizontalImageList';
 import Link from '@mui/material/Link';
 
@@ -25,17 +25,20 @@ export default function TVShowsDetailsScreen() {
     const loadingData = useSelector(state => state.tvShowsReducer?.get('loading'));
     const tvShowsDetailsData = useSelector(state => state.tvShowsReducer?.get('tvShowsDetailsData'));
     const tvShowsCreditsData = useSelector(state => state.tvShowsReducer?.get('tvShowsCreditsData'));
+    const tvShowsReviewsData = useSelector(state => state.tvShowsReducer?.get('tvShowsSeasonReviewsData'));
     const tvShowsKeywordsData = useSelector(state => state.tvShowsReducer?.get('tvShowsKeywordsData'));
 
     useEffect(() => {
         dispatch(fetchTVShowsDetails(`${id}`));
         dispatch(fetchTVShowsCredits(`${id}`));
+        dispatch(fetchTVShowsSeasonReviews(`${id}`));
         dispatch(fetchTVShowsKeywords(`${id}`));
     }, [dispatch]);
 
     console.log("loading", loadingData);
     console.log("details data", tvShowsDetailsData);
     console.log("credits data", tvShowsCreditsData);
+    console.log("reviews data", tvShowsReviewsData);
     console.log("keywords data", tvShowsKeywordsData);
 
     return (
@@ -143,8 +146,43 @@ export default function TVShowsDetailsScreen() {
                                 </Grid>
                             </Grid>
                         </Grid>}
-                    <Link href={"/tv/" + id + "/seasons"} underline="none" sx={{ paddingInline: 3 }}>
-                        <h3 className='semi-heading-style'> View All Seasons </h3>
+                    <Grid container>
+                        <Link href={"/tv/" + id + "/seasons"} underline="none" sx={{ paddingInline: 3 }}>
+                            <h3 className='semi-heading-style'> View All Seasons </h3>
+                        </Link>
+                    </Grid>
+                    <h2> Social </h2>
+                    {tvShowsReviewsData?.results === [] ?
+                        <Typography variant="body1">
+                            We don't have any reviews for this tv show. Would you like to write one?
+                        </Typography> :
+                        <Grid container sx={{ paddingInline: "20px", paddingBottom: "20px" }}>
+                            <Grid container sx={{ paddingInline: "30px", boxShadow: 2, borderRadius: 2 }}>
+                                <Grid item xs={1}>
+                                    <div style={styles.reviewDivStyle}>
+                                        <div style={styles.reviewerNameStyle}>
+                                            <Typography variant="h5">
+                                                {tvShowsReviewsData?.results[0].author.substring(0, 1)}
+                                            </Typography>
+                                        </div>
+                                    </div>
+                                </Grid>
+                                <Grid item xs={11} style={styles.detailItemStyle}>
+                                    <Typography variant="h5">
+                                        A review by {tvShowsReviewsData?.results[0].author}
+                                    </Typography>
+                                    <Typography variant="body1" sx={{ color: 'gray', fontSize: 12 }}>
+                                        Written by {tvShowsReviewsData?.results[0].author} on {tvShowsReviewsData?.results[0].created_at.substring(0, 10)}
+                                    </Typography>
+                                    <Typography variant="body1" sx={{ paddingBlock: "10px" }}>
+                                        {tvShowsReviewsData?.results[0].content}
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        </Grid>}
+                    <Link href={"/tv/" + id + "/reviews"} underline="none" sx={{ paddingInline: 3 }}>
+                        {tvShowsReviewsData?.results.length > 1 ?
+                            <h3 className='semi-heading-style'> Read All Reviews </h3> : ""}
                     </Link>
                 </Grid>
                 <Grid container style={{ width: '25%' }}>

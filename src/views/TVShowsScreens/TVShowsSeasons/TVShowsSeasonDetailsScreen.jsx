@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import './TVShowsSeasonDetailsScreen.css';
 import { HeaderComponent } from '../../../components/Header';
 import { useSelector, useDispatch } from 'react-redux';
 import { Grid } from '@mui/material';
@@ -7,25 +8,37 @@ import { POSTER_IMAGE_BASE_URL } from '../../../constants/Constants';
 import { useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import ButtonWithPopUpMenu from '../../../components/PopUpMenu/PopUpMenu.tsx';
-import { fetchTVShowsDetails, fetchTVShowsSeasonDetails } from '../../../store/Actions/tvShowsActions';
+import { fetchTVShowsDetails, fetchTVShowsSeasonDetails, fetchTVShowsSeasonEpisodeImages } from '../../../store/Actions/tvShowsActions';
 import PosterImage from '../../../assets/posterImage.svg';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import VerticalItemList from '../../../components/VerticalItemList/VerticalItemList';
 
 export default function TVShowsSeasonDetailsScreen() {
+
+
     const dispatch = useDispatch();
     const { id, index } = useParams();
 
     const tvShowsDetailsData = useSelector(state => state.tvShowsReducer?.get('tvShowsDetailsData'));
     const tvShowsSeasonDetailsData = useSelector(state => state.tvShowsReducer?.get('tvShowsSeasonDetailsData'));
+    const tvShowsSeasonEpisodeImagesData = useSelector(state => state.tvShowsReducer?.get('tvShowsSeasonEpisodeImagesData'));
 
     useEffect(() => {
         dispatch(fetchTVShowsDetails(`${id}`));
         dispatch(fetchTVShowsSeasonDetails(id, index));
+        if (tvShowsDetailsData?.seasons.length > 0) {
+            dispatch(fetchTVShowsSeasonEpisodeImages(id, index, `${tvShowsDetailsData?.seasons[index]?.episode_count}`));
+        }
     }, [dispatch]);
 
-    console.log("id", id);
-    console.log("id", index);
     console.log("details data", tvShowsDetailsData);
     console.log("season details data", tvShowsSeasonDetailsData);
+    console.log("season images data", tvShowsSeasonEpisodeImagesData);
 
     return (
         <React.Fragment>
@@ -38,18 +51,15 @@ export default function TVShowsSeasonDetailsScreen() {
             </Grid>
             <Grid container style={styles.banner2Container}>
                 <Grid item xs={2} style={styles.imageItemStyle}>
-                    <img src={`${POSTER_IMAGE_BASE_URL}${tvShowsDetailsData?.poster_path}`} alt=''
+                    <img src={`${POSTER_IMAGE_BASE_URL}${tvShowsSeasonDetailsData?.poster_path}`} alt=''
                         style={styles.imageStyle} />
                 </Grid>
                 <Grid item xs={10} style={styles.bannerDetailItemStyle}>
                     <Typography variant="h4" style={styles.textStyle}>
-                        {tvShowsDetailsData?.name}
+                        {tvShowsSeasonDetailsData?.name} ({tvShowsSeasonDetailsData?.air_date.substring(0,4)})
                     </Typography>
                     <Typography variant="body1" style={styles.paragraphStyle}>
-                        {tvShowsDetailsData?.first_air_date}
-                    </Typography>
-                    <Typography variant="body1" style={styles.paragraphStyle}>
-                        Back to main
+                        Back to season list
                     </Typography>
                 </Grid>
             </Grid>
@@ -58,7 +68,7 @@ export default function TVShowsSeasonDetailsScreen() {
                     <Typography variant="h6">
                         Episodes {tvShowsSeasonDetailsData?.episodes?.length}
                     </Typography>
-                    {tvShowsSeasonDetailsData?.episodes?.map((item, index) => (
+                    {tvShowsSeasonDetailsData?.episodes?.map((item, episodeNumber) => (
                         <Grid container sx={{ marginBlock: "10px", boxShadow: 2, borderRadius: 2 }}>
                             <Grid item xs={2}>
                                 {item.still_path === null ?
@@ -70,12 +80,108 @@ export default function TVShowsSeasonDetailsScreen() {
                             </Grid>
                             <Grid item xs={10} style={styles.detailItemStyle}>
                                 <Typography variant="h6">
-                                    {index + 1} {item.name}
+                                    {episodeNumber + 1}) {item.name}
                                 </Typography>
                                 <Typography variant="body1" sx={{ paddingBlock: "10px" }}>
                                     {item.overview}
                                 </Typography>
                             </Grid>
+                            <Accordion
+                                sx={{ width: '100%' }}>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel1a-content"
+                                    id="panel1a-header">
+                                    <Typography>Details</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <Grid container sx={{ paddingInline: '20px' }} justify="space-around" spacing={25}>
+                                        <Grid item xs>
+                                            <Typography variant="body1" className='txt-options'>
+                                                Videos
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs>
+                                            <Typography variant="body1" className='txt-options'>
+                                                Images
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs>
+                                            <Typography variant="body1" className='txt-options'>
+                                                Changes
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs>
+                                            <Typography variant="body1" className='txt-options'>
+                                                Report
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs>
+                                            <Typography variant="body1" className='txt-options'>
+                                                Edit
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container sx={{
+                                        paddingInline: '10px', paddingBlock: '30px',
+                                        width: '100%', display: 'flex', flexDirection: 'row'
+                                    }}>
+                                        <Grid item xs>
+                                            <div class="headline">
+                                                <h1>Crew </h1>
+                                                <p>{item.crew.length}</p>
+                                            </div>
+                                            <div class="headline">
+                                                <h1>{item.crew[0].job}: </h1>
+                                                <p>{item.crew[0].original_name}</p>
+                                            </div>
+                                            <div class="headline">
+                                                <h1>{item.crew[1].job}: </h1>
+                                                <p>{item.crew[1].original_name}</p>
+                                            </div>
+                                        </Grid>
+                                        <Grid item xs>
+                                            <Typography variant="body1" className='txt-options'>
+                                                Full Cast & Crew
+                                            </Typography>
+                                        </Grid>
+                                        <Grid container style={{ display: 'flex', flexDirection: 'row', paddingInline: '50px', paddingBlock: '25px', }}>
+                                            <Grid container style={{ width: '50%', display: 'flex', flexDirection: 'column' }}>
+                                                <div class="headline">
+                                                    <h1>Guest Stars </h1>
+                                                    <p>{item.guest_stars.length}</p>
+                                                </div>
+                                                <VerticalItemList dataList={item.guest_stars.slice(0, item.guest_stars.length / 2)} />
+                                            </Grid>
+                                            <Grid container style={{ width: '50%', display: 'flex', flexDirection: 'column' }}>
+                                                <VerticalItemList dataList={item.guest_stars.slice(item.guest_stars.length / 2, item.guest_stars.length)} />
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container sx={{ paddingInline: '10px' }}>
+                                        <Grid item xs>
+                                            <div class="headline">
+                                                <h1>Episode Images </h1>
+                                                <p>{tvShowsSeasonEpisodeImagesData[episodeNumber]?.stills?.length}</p>
+                                            </div>
+                                            <ImageList
+                                                sx={{
+                                                    gridAutoFlow: "column",
+                                                    justifyContent: 'space-between',
+                                                    alignItems: 'space-between',
+                                                }}>
+                                                {tvShowsSeasonEpisodeImagesData[episodeNumber]?.stills.map((item) => (
+                                                    <ImageListItem style={styles.stillImageContainer}>
+                                                        <a href={"/"}>
+                                                            <img src={`${POSTER_IMAGE_BASE_URL}${item.file_path}`} alt='' style={styles.stillImageItemStyle} />
+                                                        </a>
+                                                    </ImageListItem>
+                                                ))}
+                                            </ImageList>
+                                        </Grid>
+                                    </Grid>
+                                </AccordionDetails>
+                            </Accordion>
                         </Grid>
                     ))}
                 </Grid>
@@ -106,6 +212,7 @@ const styles = {
     },
     imageStyle: {
         height: 130,
+        borderRadius: 10
     },
     imageItemStyle: {
         paddingInline: 50,
@@ -184,5 +291,14 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         cursor: 'pointer'
+    },
+    stillImageContainer: {
+        margin: 5
+    },
+    stillImageItemStyle: {
+        width: 200,
+        height: 150,
+        cursor: 'pointer',
+        objectFit: 'cover'
     },
 }

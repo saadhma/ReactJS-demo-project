@@ -122,6 +122,36 @@ async function getTVShowsSeasonDetails(id, seasonNumber) {
     }
 }
 
+async function getTVShowsSeasonReviews(id) {
+    const tvShowsSeasonReviewsUrl = `${TV_SHOWS_DETAILS_URL}${id.payload}/reviews?api_key=${API_KEY}`;
+    try {
+        const response = await fetch(tvShowsSeasonReviewsUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function getTVShowsSeasonEpisodeImages(id, seasonNumber, episodes) {
+    const tvShowsSeasonEpisodeImagesUrl = `${TV_SHOWS_DETAILS_URL}${id.payload.id}/season/${id.payload.seasonNumber}/episode/${episodes}/images?api_key=${API_KEY}`;
+    try {
+        const response = await fetch(tvShowsSeasonEpisodeImagesUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
 function* fetchPopularTVShowsData() {
     try {
         const popularTVShowsData = yield call(getPopularTVShows);
@@ -194,6 +224,28 @@ function* fetchTVShowsSeasonDetailsData(id, seasonNumber) {
     }
 }
 
+function* fetchTVShowsSeasonReviewsData(id) {
+    try {
+        const tvShowsSeasonReviewsData = yield call(getTVShowsSeasonReviews, id);
+        yield put({ type: 'GET_TV_SHOWS_SEASON_REVIEWS_SUCCESS', tvShowsSeasonReviewsData: tvShowsSeasonReviewsData });
+    } catch (e) {
+        yield put({ type: 'GET_TV_SHOWS_SEASON_REVIEWS_FAILED', message: e.message });
+    }
+}
+
+function* fetchTVShowsSeasonEpisodeImagesData(id, seasonNumber) {
+    let finalImagesList = [];
+    try {
+        for (let i = 1; i <= id.payload.episodes; i++) {
+            const tvShowsSeasonEpisodeImagesData = yield call(getTVShowsSeasonEpisodeImages, id, seasonNumber, i);
+            finalImagesList.push(tvShowsSeasonEpisodeImagesData)
+        }
+        yield put({ type: 'GET_TV_SHOWS_SEASON_EPISODE_IMAGES_SUCCESS', tvShowsSeasonEpisodeImagesData: finalImagesList });
+    } catch (e) {
+        yield put({ type: 'GET_TV_SHOWS_SEASON_EPISODE_IMAGES_FAILED', message: e.message });
+    }
+}
+
 function* tvShowsSaga() {
     yield takeEvery('GET_POPULAR_TV_SHOWS_REQUESTED', fetchPopularTVShowsData);
     yield takeEvery('GET_AIRING_TODAY_TV_SHOWS_REQUESTED', fetchAiringTodayTVShowsData);
@@ -203,6 +255,8 @@ function* tvShowsSaga() {
     yield takeEvery('GET_TV_SHOWS_CREDITS_REQUESTED', fetchTVShowsCreditsData);
     yield takeEvery('GET_TV_SHOWS_KEYWORDS_REQUESTED', fetchTVShowsKeywordsData);
     yield takeEvery('GET_TV_SHOWS_SEASON_DETAILS_REQUESTED', fetchTVShowsSeasonDetailsData);
+    yield takeEvery('GET_TV_SHOWS_SEASON_REVIEWS_REQUESTED', fetchTVShowsSeasonReviewsData);
+    yield takeEvery('GET_TV_SHOWS_SEASON_EPISODE_IMAGES_REQUESTED', fetchTVShowsSeasonEpisodeImagesData);
 }
 
 export default tvShowsSaga;

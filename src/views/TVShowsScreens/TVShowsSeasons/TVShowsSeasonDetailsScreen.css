@@ -1,0 +1,23 @@
+.txt-options {
+    color: lightslategray;
+    text-decoration: none;
+}
+
+.txt-options:hover {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.headline h1, .headline p {
+    display: inline;
+    vertical-align: top;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 28px;    
+}
+.headline h1 {
+    font-size: 18px;
+    font-weight: bold;
+}
