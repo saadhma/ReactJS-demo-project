@@ -13,9 +13,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import GradeIcon from '@mui/icons-material/Grade';
 import Button from '@mui/material/Button';
-import { fetchTVShowsCredits, fetchTVShowsDetails, fetchTVShowsKeywords, fetchTVShowsSeasonReviews } from '../../../store/Actions/tvShowsActions';
+import { fetchTVShowsCredits, fetchTVShowsDetails, fetchTVShowsKeywords, fetchTVShowsSeasonRecommendations, fetchTVShowsSeasonReviews } from '../../../store/Actions/tvShowsActions';
 import HorizontalImageList from '../../../components/HorizontalImageList/HorizontalImageList';
 import Link from '@mui/material/Link';
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
 
 export default function TVShowsDetailsScreen() {
 
@@ -25,12 +27,14 @@ export default function TVShowsDetailsScreen() {
     const loadingData = useSelector(state => state.tvShowsReducer?.get('loading'));
     const tvShowsDetailsData = useSelector(state => state.tvShowsReducer?.get('tvShowsDetailsData'));
     const tvShowsCreditsData = useSelector(state => state.tvShowsReducer?.get('tvShowsCreditsData'));
+    const tvShowsRecommendationsData = useSelector(state => state.tvShowsReducer?.get('tvShowsSeasonRecommendationsData'));
     const tvShowsReviewsData = useSelector(state => state.tvShowsReducer?.get('tvShowsSeasonReviewsData'));
     const tvShowsKeywordsData = useSelector(state => state.tvShowsReducer?.get('tvShowsKeywordsData'));
 
     useEffect(() => {
         dispatch(fetchTVShowsDetails(`${id}`));
         dispatch(fetchTVShowsCredits(`${id}`));
+        dispatch(fetchTVShowsSeasonRecommendations(`${id}`));
         dispatch(fetchTVShowsSeasonReviews(`${id}`));
         dispatch(fetchTVShowsKeywords(`${id}`));
     }, [dispatch]);
@@ -38,30 +42,33 @@ export default function TVShowsDetailsScreen() {
     console.log("loading", loadingData);
     console.log("details data", tvShowsDetailsData);
     console.log("credits data", tvShowsCreditsData);
+    console.log("recommendations data", tvShowsRecommendationsData);
     console.log("reviews data", tvShowsReviewsData);
     console.log("keywords data", tvShowsKeywordsData);
 
     return (
         <React.Fragment>
             <HeaderComponent />
-            <Grid container style={styles.bannerContainer}>
-                <Grid item xs={3} style={styles.imageItemStyle}>
+            <Grid container columns={{ xs: 4, sm: 8, md: 12 }} style={styles.bannerContainer}>
+                <Grid item xs={2.3} style={styles.imageItemStyle}>
                     <img src={`${POSTER_IMAGE_BASE_URL}${tvShowsDetailsData?.poster_path}`} alt=''
                         style={styles.imageStyle} />
                 </Grid>
-                <Grid item xs={9} style={styles.detailItemStyle}>
+                <Grid item xs={9.7} style={styles.detailItemStyle}>
                     <Typography variant="h4" style={styles.textStyle}>
-                        {tvShowsDetailsData?.original_name}
+                        {`${tvShowsDetailsData?.original_name} `}
+                        ({tvShowsDetailsData?.first_air_date.substring(0, 4)}-{
+                            tvShowsDetailsData?.status === "Returning Series" ? "" :
+                                tvShowsDetailsData?.last_air_date.substring(0, 4)})
                     </Typography>
-                    <Typography variant="body1" style={styles.paragraphStyle}>
-                        {tvShowsDetailsData?.first_air_date}
-                    </Typography>
-                    <Typography variant="body1" style={styles.paragraphStyle}>
-                        Action
-                    </Typography>
-                    <Grid sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Grid item sx={{ display: 'flex', width: '20%', alignItems: 'center', justifyContent: 'space-evenly' }}>
-                            <Grid item>
+                    {tvShowsDetailsData?.genres.map((item) => (
+                        <Typography variant="body1" style={styles.paragraphStyle}>
+                            {item.name}
+                        </Typography>
+                    ))}
+                    <Grid xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Grid item xs={2} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
+                            <Grid item xs={3}>
                                 <div style={styles.percentageDivStyle}>
                                     <div style={styles.circleStyle}>
                                         <p style={{ fontSize: 18 }}>{Math.round(tvShowsDetailsData?.vote_average / 0.1)}%</p>
@@ -71,13 +78,13 @@ export default function TVShowsDetailsScreen() {
                                     </div>
                                 </div>
                             </Grid>
-                            <Grid item xs={1}>
+                            <Grid item xs={2}>
                                 <Typography variant="body1" style={styles.textStyle}>
                                     User Score
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid item sx={{ display: 'flex', width: '30%', alignItems: 'center', justifyContent: 'space-around' }}>
+                        <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
                             <Grid item>
                                 <div style={styles.iconDivStyle}>
                                     <PlaylistAddIcon sx={{ color: Colors.whiteColor }} />
@@ -184,15 +191,43 @@ export default function TVShowsDetailsScreen() {
                         {tvShowsReviewsData?.results.length > 1 ?
                             <h3 className='semi-heading-style'> Read All Reviews </h3> : ""}
                     </Link>
+                    <Grid container>
+                        <h2 className='recommendations-div-style'> Recommendations </h2>
+                        <ImageList
+                            sx={{
+                                gridAutoFlow: "column",
+                                justifyContent: 'space-between',
+                                alignItems: 'space-between',
+                                paddingInline: '20px'
+                            }}
+                        >
+                            {tvShowsRecommendationsData?.results.map((item) => (
+                                <ImageListItem style={styles.recommendationsContainer}>
+                                    <a href={"/tv/" + item.id}>
+                                        <img src={`${POSTER_IMAGE_BASE_URL}${item.poster_path}`} alt='' style={styles.recommendationItemStyle} />
+                                    </a>
+                                    <div className='recommendations-paragraph-style'>
+                                        <div>
+                                            {item.name}
+                                        </div>
+                                        <div>
+                                            {Math.round(item.vote_average / 0.1)}%
+                                        </div>
+                                    </div>
+                                </ImageListItem>
+                            ))}
+                        </ImageList>
+                    </Grid>
                 </Grid>
                 <Grid container style={{ width: '25%' }}>
                     <Grid item sx={{ paddingInline: '20px' }}>
                         <h4> Status </h4>
-                        {/* <p> {tvShowsDetailsData?.status} </p> */}
+                        <p> {tvShowsDetailsData?.status} </p>
                         <h4> Original Language </h4>
-                        {/* <p> {tvShowsDetailsData?.original_language} </p> */}
-                        <h4> Budget </h4>
-                        {/* <p> ${tvShowsDetailsData?.budget}.00 </p> */}
+                        <p> {tvShowsDetailsData?.original_language} </p>
+                        <h4> Network </h4>
+                        <img src={`${POSTER_IMAGE_BASE_URL}${tvShowsDetailsData?.networks[0].logo_path}`} alt=''
+                                        style={styles.networkImageStyle} />
                         <h4> Revenue </h4>
                         {/* <p> ${tvShowsDetailsData?.revenue}.00 </p> */}
                     </Grid>
@@ -285,9 +320,7 @@ const styles = {
         margin: 5
     },
     bannerContainer: {
-        width: '100%',
         background: Colors.blackColor,
-        display: 'flex',
         paddingTop: 75,
     },
     sectionContainer: {
@@ -315,7 +348,7 @@ const styles = {
     },
     detailItemStyle: {
         paddingBlock: 30,
-        paddingRight: 50
+        paddingInline: 50
     },
     textStyle: {
         fontWeight: 'bold',
@@ -387,5 +420,9 @@ const styles = {
         height: 200,
         borderTopLeftRadius: 10,
         borderBottomLeftRadius: 10,
+    },
+    networkImageStyle: {
+        height: 50,
+        objectFit: 'fit'
     },
 }

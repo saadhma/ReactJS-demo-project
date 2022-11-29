@@ -32,6 +32,7 @@ import TVShowsCastAndCrewScreen from "./views/TVShowsScreens/Cast&Crew/TVShowsCa
 import TVShowsSeasonsScreen from "./views/TVShowsScreens/TVShowsSeasons/TVShowsSeasonsScreen";
 import TVShowsSeasonDetailsScreen from "./views/TVShowsScreens/TVShowsSeasons/TVShowsSeasonDetailsScreen";
 import TVShowReviewsScreen from "./views/TVShowsScreens/TVShowReviews/TVShowReviewsScreen";
+import PopularPeopleScreen from "./views/PeopleScreens/PopularPeople/PopularPeopleScreen";
 
 export default function RoutesScreen() {
     return (
@@ -53,6 +54,7 @@ export default function RoutesScreen() {
             <Route path="/PrivacyPolicyScreen" element={<PrivacyPolicyScreen/>} exact/>
             <Route path="/ContactUsScreen" element={<ContactUsScreen/>} exact/>
             <Route path="/SearchScreen" element={<SearchScreen/>} exact/>
+            <Route path="/PopularPeopleScreen" element={<PopularPeopleScreen/>} exact/>
             <Route path="/faq/general" element={<GeneralFAQScreen/>} exact/>
             <Route path="/faq/account" element={<AccountFAQScreen/>} exact/>
             <Route path="/faq/website" element={<WebsiteFAQScreen/>} exact/>

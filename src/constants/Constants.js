@@ -40,6 +40,10 @@ export const SEARCH_COLLECTION_URL = `${BASE_URL}/search/collection`;
 export const SEARCH_COMPANIES_URL = `${BASE_URL}/search/company`;
 export const SEARCH_KEYWORDS_URL = `${BASE_URL}/search/keyword`;
 
+// PEOPLE URL LINKS
+
+export const SEARCH_POPULAR_PEOPLE_URL = `${BASE_URL}/person/popular`;
+
 // KEYS
 
 export const API_KEY = '3161dc5d20e56e746f849ecd2466c1bf';

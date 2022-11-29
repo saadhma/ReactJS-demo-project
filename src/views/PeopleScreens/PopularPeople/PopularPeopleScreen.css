@@ -1,0 +1,62 @@
+.text-style {
+    width: 15%;
+    padding-left: 30px;
+    padding-right: 20px;
+    font-weight: bold;
+}
+
+.img-style {
+    padding-left: 12px;
+    padding-block: 10px;
+    font-weight: 500;
+}
+
+.percentage-div-style {
+    position: relative;
+}
+
+.text-block {
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+}
+
+.movie-box {
+    width: "20%";
+    height: 300px;
+    box-shadow: 2px 3px 2px #E5E4E2;
+    margin: 5px;
+    border: 1px solid #E5E4E2;
+}
+
+.container {
+   display: flex;
+   justify-content: space-around;
+}
+
+.img-style {
+    padding-left: 12px;
+    padding-block: 10px;
+    font-weight: 500;
+}
+
+.title-style {
+    font-weight: bold;
+    color: black;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    padding-inline: 15px;
+}
+
+.subtitle-style {
+    color: lightslategrey;
+    padding-inline: 15px;
+}
+
+.semi-subtitle-style {
+    color: lightslategrey;
+    padding-block: 5px;
+}

@@ -83,7 +83,7 @@ export default function ButtonWithPopUpMenu({ items, buttonName }) {
               {buttonName}
             </Button>
             <Menu {...bindMenu(popupState)}>
-              <a href='/PopularMoviesScreen' style={{ textDecoration: 'none', color: Colors.headerColor }}>
+              <a href='/PopularPeopleScreen' style={{ textDecoration: 'none', color: Colors.headerColor }}>
                 <MenuItem onClick={popupState.close}>Popular People</MenuItem>
               </a>
             </Menu>

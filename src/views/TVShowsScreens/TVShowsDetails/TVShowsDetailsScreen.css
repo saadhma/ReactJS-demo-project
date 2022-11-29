@@ -6,3 +6,16 @@
 .div-rating-style {
     display: flex;
 }
+
+.recommendations-div-style {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 20px;
+}
+
+.recommendations-paragraph-style {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-block: 5px;
+}

@@ -122,6 +122,23 @@ async function getTVShowsSeasonDetails(id, seasonNumber) {
     }
 }
 
+async function getTVShowsSeasonRecommendations(id) {
+    console.log(id);
+    const tvShowsSeasonRecommendationsUrl = `${TV_SHOWS_DETAILS_URL}${id.payload}/recommendations?api_key=${API_KEY}`;
+    console.log(tvShowsSeasonRecommendationsUrl);
+    try {
+        const response = await fetch(tvShowsSeasonRecommendationsUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
 async function getTVShowsSeasonReviews(id) {
     const tvShowsSeasonReviewsUrl = `${TV_SHOWS_DETAILS_URL}${id.payload}/reviews?api_key=${API_KEY}`;
     try {
@@ -224,6 +241,15 @@ function* fetchTVShowsSeasonDetailsData(id, seasonNumber) {
     }
 }
 
+function* fetchTVShowsSeasonRecommendationsData(id) {
+    try {
+        const tvShowsSeasonRecommendationsData = yield call(getTVShowsSeasonRecommendations, id);
+        yield put({ type: 'GET_TV_SHOWS_SEASON_RECOMMENDATIONS_SUCCESS', tvShowsSeasonRecommendationsData: tvShowsSeasonRecommendationsData });
+    } catch (e) {
+        yield put({ type: 'GET_TV_SHOWS_SEASON_RECOMMENDATIONS_FAILED', message: e.message });
+    }
+}
+
 function* fetchTVShowsSeasonReviewsData(id) {
     try {
         const tvShowsSeasonReviewsData = yield call(getTVShowsSeasonReviews, id);
@@ -255,6 +281,7 @@ function* tvShowsSaga() {
     yield takeEvery('GET_TV_SHOWS_CREDITS_REQUESTED', fetchTVShowsCreditsData);
     yield takeEvery('GET_TV_SHOWS_KEYWORDS_REQUESTED', fetchTVShowsKeywordsData);
     yield takeEvery('GET_TV_SHOWS_SEASON_DETAILS_REQUESTED', fetchTVShowsSeasonDetailsData);
+    yield takeEvery('GET_TV_SHOWS_SEASON_RECOMMENDATIONS_REQUESTED', fetchTVShowsSeasonRecommendationsData);
     yield takeEvery('GET_TV_SHOWS_SEASON_REVIEWS_REQUESTED', fetchTVShowsSeasonReviewsData);
     yield takeEvery('GET_TV_SHOWS_SEASON_EPISODE_IMAGES_REQUESTED', fetchTVShowsSeasonEpisodeImagesData);
 }
