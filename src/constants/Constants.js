@@ -43,6 +43,7 @@ export const SEARCH_KEYWORDS_URL = `${BASE_URL}/search/keyword`;
 // PEOPLE URL LINKS
 
 export const SEARCH_POPULAR_PEOPLE_URL = `${BASE_URL}/person/popular`;
+export const SEARCH_PERSON_DETAILS_URL = `${BASE_URL}/person/`;
 
 // KEYS
 

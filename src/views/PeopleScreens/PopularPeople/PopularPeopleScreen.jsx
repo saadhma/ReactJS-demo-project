@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import FooterComponent from '../../../components/Footer/Footer';
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
 import Typography from '@mui/material/Typography';
 import { POSTER_IMAGE_BASE_URL } from '../../../constants/Constants';
 import { fetchPopularPeople } from '../../../store/Actions/peopleActions';
@@ -36,7 +35,7 @@ export default function PopularPeopleScreen() {
                 {popularPeopleData?.results?.map((item) => (
                     <div className="movie-box">
                         <ImageListItem key={item.img}>
-                            <a href={"/tv/" + item.id}>
+                            <a href={"/person/" + item.id}>
                                 <img
                                     src={`${POSTER_IMAGE_BASE_URL}${item.profile_path}`}
                                     style={styles.imageItemStyle}

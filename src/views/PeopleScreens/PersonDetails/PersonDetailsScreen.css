@@ -1,0 +1,27 @@
+.title-style {
+    font-weight: bold;
+    color: black;
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+
+.headline h1, .headline p {
+    display: inline;
+    vertical-align: top;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    line-height: 28px;   
+}
+
+.headline h1 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.headline p {
+    display: inline;
+    vertical-align: top;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+}
