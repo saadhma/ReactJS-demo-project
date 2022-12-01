@@ -197,6 +197,22 @@ async function getMovieMediaVideos(id) {
     }
 }
 
+async function getMovieAlternativeTitles(id) {
+    console.log(id);
+    const movieAlternativeTitlesUrl = `${MOVIE_DETAILS_URL}${id.payload}/alternative_titles?api_key=${API_KEY}`;
+    try {
+        const response = await fetch(movieAlternativeTitlesUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
 function* fetchMoviesData() {
     try {
         const streammingMovies = yield call(getStreammingMovies);
@@ -305,6 +321,17 @@ function* fetchMovieMediaVideosData(id) {
     }
 }
 
+function* fetchMovieAlternativeTitlesData(id) {
+    try {
+        const movieAlternativeTitlesData = yield call(getMovieAlternativeTitles, id);
+        console.log(movieAlternativeTitlesData);
+        yield put({ type: 'GET_MOVIE_ALTERNATIVE_TITLES_SUCCESS', movieAlternativeTitlesData: movieAlternativeTitlesData });
+    } catch (e) {
+        console.log(e.message);
+        yield put({ type: 'GET_MOVIE_ALTERNATIVE_TITLES_FAILED', message: e.message });
+    }
+}
+
 function* moviesSaga() {
     yield takeEvery('GET_MOVIES_REQUESTED', fetchMoviesData);
     yield takeEvery('GET_POPULAR_MOVIES_REQUESTED', fetchPopularMoviesData);
@@ -317,6 +344,7 @@ function* moviesSaga() {
     yield takeEvery('GET_MOVIE_REVIEWS_REQUESTED', fetchMovieReviewsData);
     yield takeEvery('GET_MOVIE_RECOMMENDATIONS_REQUESTED', fetchMovieRecommendationsData);
     yield takeEvery('GET_MOVIE_MEDIA_VIDEOS_REQUESTED', fetchMovieMediaVideosData);
+    yield takeEvery('GET_MOVIE_ALTERNATIVE_TITLES_REQUESTED', fetchMovieAlternativeTitlesData);
 }
 
 export default moviesSaga;

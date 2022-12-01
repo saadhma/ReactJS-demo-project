@@ -33,7 +33,7 @@ export default function MovieReviewsScreen() {
         <React.Fragment>
             <HeaderComponent />
             <Grid container style={styles.banner1Container}>
-                <ButtonWithPopUpMenu items={8} buttonName={'Overview'} />
+                <ButtonWithPopUpMenu movieId={id} items={8} buttonName={'Overview'} />
                 <ButtonWithPopUpMenu items={4} buttonName={'Media'} />
                 <ButtonWithPopUpMenu items={2} buttonName={'Fandom'} />
                 <ButtonWithPopUpMenu items={3} buttonName={'Share'} />

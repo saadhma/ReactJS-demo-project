@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import './AlternativeTitlesScreen.css';
 import { Box } from "@mui/material";
 import Typography from '@mui/material/Typography';
@@ -11,6 +12,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchMovieAlternativeTitles } from '../../../store/Actions/moviesActions';
+import { InsertEmoticon } from '@mui/icons-material';
 
 function createData(name, type) {
     return { name, type };
@@ -21,6 +25,18 @@ const rows = [
 ];
 
 export default function AlternativeTitlesScreen() {
+
+    const dispatch = useDispatch();
+    const { id } = useParams();
+
+    const movieAlternativeTitlesData = useSelector(state => state.moviesReducer?.get('movieAlternativeTitlesData'));
+
+    useEffect(() => {
+        dispatch(fetchMovieAlternativeTitles(`${id}`));
+    }, [dispatch]); 
+
+    console.log("alternative titles", movieAlternativeTitlesData)
+
     return (
         <div>
             <HeaderComponent />
@@ -72,15 +88,14 @@ export default function AlternativeTitlesScreen() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {rows.map((row) => (
+                                {movieAlternativeTitlesData?.titles?.map((item) => (
                                     <TableRow
-                                        key={row.name}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
+                                        key={item.iso_3166_1}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                         <TableCell component="th" scope="row">
-                                            {row.name}
+                                            {item.title}
                                         </TableCell>
-                                        <TableCell align="left">{row.type}</TableCell>
+                                        <TableCell align="left">{item.type}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

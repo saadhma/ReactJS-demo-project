@@ -6,7 +6,7 @@ import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { Colors } from '../../constants/Colors';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-export default function ButtonWithPopUpMenu({ items, buttonName }) {
+export default function ButtonWithPopUpMenu({ movieId, items, buttonName }) {
 
   if (items === 4 && buttonName === 'Movies') {
     return (
@@ -141,7 +141,7 @@ export default function ButtonWithPopUpMenu({ items, buttonName }) {
               <a href='/' style={styles.textStyle}>
                 <MenuItem onClick={popupState.close}>Main</MenuItem>
               </a>
-              <a href='/movie/:id/titles' style={styles.textStyle}>
+              <a href={'/movie/' + movieId + '/titles'} style={styles.textStyle}>
                 <MenuItem onClick={popupState.close}>Alternative Titles</MenuItem>
               </a>
               <a href='/' style={styles.textStyle}>

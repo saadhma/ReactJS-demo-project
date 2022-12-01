@@ -53,12 +53,12 @@ export default function MovieDetailsScreen() {
     return (
         <React.Fragment>
             <HeaderComponent />
-            <Grid container style={styles.bannerContainer}>
-                <Grid item xs={3} style={styles.imageItemStyle}>
+            <Grid container columns={{ xs: 4, sm: 8, md: 12 }} style={styles.bannerContainer}>
+                <Grid item xs={2.5} style={styles.imageItemStyle}>
                     <img src={`${POSTER_IMAGE_BASE_URL}${movieDetailData?.poster_path}`} alt=''
                         style={styles.imageStyle} />
                 </Grid>
-                <Grid item xs={9} style={styles.detailItemStyle}>
+                <Grid item xs={9.5} style={styles.detailItemStyle}>
                     <Typography variant="h4" style={styles.textStyle}>
                         {movieDetailData?.original_title}
                     </Typography>
